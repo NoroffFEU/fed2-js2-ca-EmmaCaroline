@@ -1,14 +1,11 @@
 import { API_AUTH_REGISTER } from "../constants";
 import { headers } from "../headers";
 
-export async function register({ name, email, password, bio, banner, avatar }) {
+export async function register({ name, email, password }) {
   const body = JSON.stringify({
     name,
     email,
     password,
-    bio,
-    banner,
-    avatar,
   });
 
   try {
