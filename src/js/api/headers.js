@@ -1,8 +1,6 @@
 import { API_KEY } from "./constants";
 import * as storage from "./auth/key";
 
-//const token = storage.load("token");
-
 export function headers() {
   const token = storage.load("token");
   const headers = new Headers({
