@@ -10,9 +10,15 @@ export async function onLogin(event) {
   try {
     const response = await login(user);
     console.log("Login ok", response);
-    alert(`Login successful. Hello ${user.name}`);
-    window.location.href = "/auth/login/";
+    alert(`Login successful. Hello ${response.data.name}`); // The use of alert here is a placeholder until a less intruding, non-blocking notification is made with styling, for a better user experience
+    window.location.href = "/";
   } catch (error) {
-    console.error("Login failed:", error);
+    if (error.name === "TypeError") {
+      alert("Network error, try again later");
+    } else {
+      alert(`Login failed: ${error.message}`);
+    }
+    console.error("Login failed", error);
+    throw error;
   }
 }

@@ -17,7 +17,6 @@ export async function register({ name, email, password }) {
     }
 
     const result = await response.json();
-    alert("You are now registered");
     return result;
   } catch (error) {
     if (error.name === "TypeError") {

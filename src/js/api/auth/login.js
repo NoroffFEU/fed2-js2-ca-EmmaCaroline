@@ -1,5 +1,5 @@
 import { API_AUTH_LOGIN } from "../constants";
-import { save } from "./key";
+import * as storage from "./key";
 import { headers } from "../headers";
 
 export async function login({ email, password }) {
@@ -18,20 +18,11 @@ export async function login({ email, password }) {
     }
 
     const result = await response.json();
-    save("token", result.data.accessToken);
-    save("user", result.data);
+    storage.save("token", result.data.accessToken);
+    storage.save("user", result.data);
 
-    alert("You are now logged in"); //Remove later when working as it should
-
-    window.location.href = "/";
-
-    return result; //Do I need this? check later
+    return result;
   } catch (error) {
-    if (error.name === "TypeError") {
-      alert("Network error, try again later");
-    } else {
-      alert(`Login failed: ${error.message}`);
-    }
     console.error("Login failed", error);
     throw error;
   }

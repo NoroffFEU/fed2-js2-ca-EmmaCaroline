@@ -6,5 +6,3 @@ export function setLogoutListener() {
     logoutBtn.addEventListener("click", onLogout);
   }
 }
-
-// REMEMBER: I need to find the right place to call this function
