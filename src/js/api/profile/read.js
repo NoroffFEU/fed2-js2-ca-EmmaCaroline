@@ -40,21 +40,23 @@ export async function readProfile() {
 export async function displayProfile(profile) {
   const profileContainer = document.getElementById("profile-container");
 
+  const bannerImage = document.createElement("img");
+  bannerImage.src = profile.banner.url;
+  bannerImage.alt = profile.banner.alt;
+  bannerImage.className = "banner-image";
+
   const userName = document.createElement("h2");
   userName.textContent = `${profile.name}`;
 
-  const bannerImage = document.createElement("img");
-  bannerImage.src = profile.banner?.url;
-  bannerImage.alt = profile.banner?.alt;
-
   const avatarImage = document.createElement("img");
-  avatarImage.src = profile.avatar?.url;
-  avatarImage.alt = profile.avatar?.alt;
+  avatarImage.src = profile.avatar.url;
+  avatarImage.alt = profile.avatar.alt;
+  avatarImage.className = "avatar-image";
 
   const bio = document.createElement("p");
   bio.textContent = profile.bio || "No bio available";
 
-  profileContainer.append(userName, bannerImage, avatarImage, bio);
+  profileContainer.append(bannerImage, userName, avatarImage, bio);
 }
 
 export async function readProfiles(limit, page) {}
