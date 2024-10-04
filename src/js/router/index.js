@@ -2,11 +2,7 @@
 // In order to add additional pages, you will need to implement them below
 // You may change the behaviour or approach of this file if you choose
 
-import { setLogoutListener } from "../ui/global/logout.js";
-
 export default async function router(pathname = window.location.pathname) {
-  setLogoutListener();
-
   switch (pathname) {
     case "/":
       await import("./views/home.js");
