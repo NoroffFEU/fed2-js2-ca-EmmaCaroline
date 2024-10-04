@@ -1,3 +1,5 @@
+// Access, save and remove keys and their values from local storage
+
 export function save(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
