@@ -1,6 +1,7 @@
 import { authGuard } from "../../utilities/authGuard";
 import { readProfileData } from "../../api/profile/read";
 import { onUpdateProfile } from "../../ui/profile/update";
+import { prefillProfileForm } from "../../ui/profile/update";
 
 const form = document.forms.updateProfile;
 
@@ -15,6 +16,8 @@ document.getElementById("toggle-button").addEventListener("click", function () {
   } else {
     form.style.display = "block";
     this.textContent = "Cancel Update";
+
+    prefillProfileForm();
   }
 });
 

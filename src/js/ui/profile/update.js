@@ -1,4 +1,5 @@
 import { load } from "../../api/auth/key";
+import { readProfile } from "../../api/profile/read";
 import { updateProfile } from "../../api/profile/update";
 
 export async function onUpdateProfile(event) {
@@ -45,5 +46,24 @@ export async function onUpdateProfile(event) {
     window.location.reload();
   } else {
     alert("No changes were made to the profile.");
+  }
+}
+
+export async function prefillProfileForm() {
+  const user = load("user");
+  if (!user || !user.name) {
+    console.error("User is not logged in or user object is invalid");
+    return;
+  }
+
+  const username = user.name;
+
+  // Fetch the current profile to pre-fill the form
+  const profile = await readProfile(username);
+
+  // Pre-fill the bio field if it exists
+  const bioInput = document.forms["updateProfile"].elements["bio"];
+  if (bioInput && profile.bio) {
+    bioInput.value = profile.bio; // Prefill the bio field with current bio
   }
 }
