@@ -2,6 +2,7 @@ import { authGuard } from "../../utilities/authGuard";
 import { readProfileData } from "../../api/profile/read";
 import { onUpdateProfile } from "../../ui/profile/update";
 import { prefillProfileForm } from "../../ui/profile/update";
+import { onReadPostsByUser } from "../../ui/post/read";
 
 const form = document.forms.updateProfile;
 
@@ -23,3 +24,4 @@ document.getElementById("toggle-button").addEventListener("click", function () {
 
 authGuard();
 readProfileData();
+onReadPostsByUser();
