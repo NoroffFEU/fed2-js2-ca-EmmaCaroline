@@ -16,6 +16,11 @@ export async function onCreatePost(event) {
     };
   }
 
+  if (!post.title) {
+    alert("Title is required for creating a post");
+    return;
+  }
+
   const response = await createPost(post);
   alert("Post created!");
   form.reset();
