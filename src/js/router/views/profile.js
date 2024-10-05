@@ -6,7 +6,7 @@ const form = document.forms.updateProfile;
 
 form.addEventListener("submit", onUpdateProfile);
 
-document.getElementById("toggleButton").addEventListener("click", function () {
+document.getElementById("toggle-button").addEventListener("click", function () {
   const isFormVisible = form.style.display === "block";
 
   if (isFormVisible) {
