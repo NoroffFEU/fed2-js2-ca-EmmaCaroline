@@ -6,11 +6,25 @@
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
   </head>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+    </nav>
+  </header>
   <body>
     <h1>Create Post</h1>
-
     <form name="createPost">
-      <button>Create Post</button>
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title">
+      <label for="text">Text</label>
+      <textarea type="text" name="text" id="body"></textarea>
+      <label for="media-url">Media</label>
+      <input type="url" name="media-url" placeholder="Insert image url">
+      <label for="media-alt">Media alt</label>
+      <input type="text" name="media-alt" placeholder="Alt text for image">
+      <label for="tags">Tags</label>
+      <input type="text" name="tags">
+      <button type="submit">Create Post</button>
     </form>
   </body>
 </html>
