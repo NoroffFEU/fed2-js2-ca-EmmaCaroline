@@ -23,6 +23,7 @@ export async function onLogin(event) {
     const response = await login(user);
     console.log("Login ok", response);
     alert(`Login successful. Hello ${response.data.name}`);
+    window.location.href = "/";
   } catch (error) {
     if (error.name === "TypeError") {
       alert("Network error, try again later");
