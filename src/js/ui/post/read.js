@@ -1,7 +1,10 @@
 import { readPosts, readPost, readPostsByUser } from "../../api/post/read";
+import { load } from "../../api/auth/key";
 
 async function getPosts(posts) {
   const postsContainer = document.getElementById("posts-container");
+  const singlePostContainer = document.getElementById("single-post-container");
+  const postByUserContainer = document.getElementById("own-posts-container");
 
   // Checks if posts is an array before proceeding
   if (!Array.isArray(posts)) {
@@ -33,8 +36,15 @@ async function getPosts(posts) {
     const tags = document.createElement("p");
     tags.innerText = post.tags;
 
-    postData.append(username, title, imageContainer, body, tags);
-    postsContainer.append(postData);
+    postData.append(title, imageContainer, username, body, tags);
+
+    if (window.location.pathname === "/") {
+      postsContainer.append(postData);
+    } else if (window.location.pathname === "/post/") {
+      singlePostContainer.append(postData);
+    } else if (window.location.pathname === "/profile/") {
+      postByUserContainer.append(postData);
+    }
   });
 }
 
@@ -48,6 +58,15 @@ export async function onReadAllPosts() {
   }
 }
 
-export async function onReadSinglePost() {}
+export async function onReadPostsByUser() {
+  const user = load("user");
+  const userName = user.name;
+  try {
+    const postsByUser = await readPostsByUser(userName);
+    await getPosts(postsByUser);
+  } catch (error) {
+    console.error("Error reading posts by user: ", error);
+  }
+}
 
-export async function onReadPostsByUser() {}
+export async function onReadSinglePost() {} //will add later

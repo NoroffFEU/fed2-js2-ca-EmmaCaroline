@@ -53,8 +53,16 @@ export async function readPosts(limit = 12, page = 1, tag) {
 }
 
 export async function readPostsByUser(username, limit = 12, page = 1, tag) {
+  const endpoint = new URL(`${API_SOCIAL_PROFILES}/${username}/posts`);
+  endpoint.searchParams.append("_author", "true");
+  endpoint.searchParams.append("limit", limit);
+  endpoint.searchParams.append("page", page);
+
+  if (tag) {
+    endpoint.searchParams.append("tag", tag);
+  }
+
   try {
-    const endpoint = `${API_SOCIAL_PROFILES}/{${username}/posts`; //Is this last bit written correct? check
     const response = await fetch(endpoint, {
       headers: headers(),
       method: "GET",
@@ -62,13 +70,13 @@ export async function readPostsByUser(username, limit = 12, page = 1, tag) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error("Failed to fetch users posts: " + errorText);
+      throw new Error("Failed to fetch posts: " + errorText);
     }
 
-    const userPostData = await response.json();
-    return userPostData.data;
+    const postsData = await response.json();
+    return postsData.data;
   } catch (error) {
-    console.error("Fetching users posts failed: ", error);
+    console.error("Fetching posts failed: ", error);
     throw error;
   }
 }
