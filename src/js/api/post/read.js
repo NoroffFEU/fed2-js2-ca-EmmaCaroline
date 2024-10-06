@@ -24,8 +24,17 @@ export async function readPost(id) {
 }
 
 export async function readPosts(limit = 12, page = 1, tag) {
+  const endpoint = new URL(API_SOCIAL_POSTS);
+  endpoint.searchParams.append("_author", "true");
+  endpoint.searchParams.append("limit", limit);
+  endpoint.searchParams.append("page", page);
+
+  if (tag) {
+    endpoint.searchParams.append("tag", tag);
+  }
+
   try {
-    const response = await fetch(API_SOCIAL_POSTS, {
+    const response = await fetch(endpoint, {
       headers: headers(),
       method: "GET",
     });
@@ -36,7 +45,7 @@ export async function readPosts(limit = 12, page = 1, tag) {
     }
 
     const postsData = await response.json();
-    return postsData.data;
+    return postsData;
   } catch (error) {
     console.error("Fetching posts failed: ", error);
     throw error;
