@@ -54,44 +54,6 @@ async function getPosts(posts) {
   });
 }
 
-/*export async function getSinglePost(post) {
-  const singlePostContainer = document.getElementById("single-post-container");
-
-  const postData = document.createElement("div");
-  postData.classList.add("post-data");
-
-  const username = document.createElement("p");
-  if (post.author) {
-    username.innerText = `Posted by: ${post.author.name}`;
-  }
-
-  const title = document.createElement("h2");
-  title.textContent = post.title;
-
-  const imageContainer = document.createElement("div");
-  if (post.media && post.media.url) {
-    const image = document.createElement("img");
-    image.src = post.media.url;
-    image.alt = post.media.alt || "No description provided";
-    imageContainer.appendChild(image);
-  }
-
-  const body = document.createElement("p");
-  body.innerText = post.body || "No content available";
-
-  const tags = document.createElement("p");
-  if (Array.isArray(post.tags) && post.tags.length > 0) {
-    tags.innerText = post.tags.join(", ");
-  } else {
-    tags.innerText = "No tags";
-  }
-
-  postData.append(title, imageContainer, body, tags, username);
-  singlePostContainer.append(postData);
-
-  onDeletePost(post, post.author.name);
-}*/
-
 export async function getSinglePost(post) {
   const singlePostContainer = document.getElementById("single-post-container");
 
