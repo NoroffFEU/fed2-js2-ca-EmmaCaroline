@@ -1,6 +1,17 @@
 import { API_AUTH_REGISTER } from "../constants";
 import { headers } from "../headers";
 
+/**
+ * API call function to register a new user with the provided name, email, and password.
+ *
+ * @param {Object} params - The registration parameters.
+ * @param {string} params.name - The user's name.
+ * @param {string} params.email - The user's email.
+ * @param {string} params.password - The user's password.
+ * @returns {Promise<Object>} The result of the registration request.
+ * @throws {Error} If the registration fails.
+ */
+
 export async function register({ name, email, password }) {
   const body = JSON.stringify({ name, email, password });
 

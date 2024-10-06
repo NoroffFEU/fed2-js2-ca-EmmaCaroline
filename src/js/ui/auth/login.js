@@ -1,5 +1,17 @@
 import { login } from "../../api/auth/login";
 
+/**
+ * Handles the login form submission and processes user login.
+ *
+ * This function prevents the default form submission, retrieves the form data,
+ * and attempts to log the user in. On successful login, it displays a success
+ * message. If the login fails, it alerts the user and logs the error.
+ *
+ * @param {Event} event - The event object from the form submission.
+ * @returns {Promise<void>} A promise that resolves when the login process is complete.
+ * @throws {Error} If the login process encounters an error.
+ */
+
 export async function onLogin(event) {
   event.preventDefault();
 
@@ -10,8 +22,7 @@ export async function onLogin(event) {
   try {
     const response = await login(user);
     console.log("Login ok", response);
-    alert(`Login successful. Hello ${response.data.name}`); // The use of alert here is a placeholder until a less intruding, non-blocking notification is made with styling, for a better user experience
-    window.location.href = "/";
+    alert(`Login successful. Hello ${response.data.name}`);
   } catch (error) {
     if (error.name === "TypeError") {
       alert("Network error, try again later");

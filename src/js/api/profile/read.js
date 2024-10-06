@@ -2,6 +2,14 @@ import { API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../headers";
 import { load } from "../auth/key";
 
+/**
+ * API call function to fetch the profile data of a user by their username.
+ *
+ * @param {string} username - The username of the profile to fetch.
+ * @returns {Promise<Object>} The user profile data fetched from the API.
+ * @throws {Error} If fetching the profile fails.
+ */
+
 export async function readProfile(username) {
   const endpoint = `${API_SOCIAL_PROFILES}/${username}`;
   try {
@@ -27,6 +35,17 @@ export async function readProfile(username) {
     throw error;
   }
 }
+
+/**
+ * Loads and displays the logged-in user's profile data.
+ *
+ * This function retrieves the user's profile using the username from
+ * local storage, then dynamically creates and appends the profile
+ * elements to the profile container in the DOM.
+ *
+ * @returns {Promise<void>} A promise that resolves when the profile data is loaded and displayed.
+ * @throws {Error} If the user is not logged in or the profile data cannot be fetched.
+ */
 
 export const readProfileData = async () => {
   const user = load("user");
@@ -58,4 +77,4 @@ export const readProfileData = async () => {
   profileContainer.append(bannerImage, userName, avatarImage, bio);
 };
 
-export async function readProfiles(limit, page) {}
+//export async function readProfiles(limit, page) {} Unused function for now, will add later

@@ -2,6 +2,16 @@ import { API_SOCIAL_POSTS } from "../constants";
 import { API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../headers";
 
+/**
+ * API call function to fetch a list of posts with optional pagination and tagging.
+ *
+ * @param {number} [limit=12] - The maximum number of posts to return.
+ * @param {number} [page=1] - The page number for pagination.
+ * @param {string} [tag] - An optional tag to filter the posts.
+ * @returns {Promise<Object>} The posts data fetched from the API.
+ * @throws {Error} If fetching posts fails.
+ */
+
 export async function readPosts(limit = 12, page = 1, tag) {
   const endpoint = new URL(API_SOCIAL_POSTS);
   endpoint.searchParams.append("_author", "true");
@@ -31,6 +41,15 @@ export async function readPosts(limit = 12, page = 1, tag) {
   }
 }
 
+/**
+ * API call function to fetch a single post by its ID, with an option to include the author's data.
+ *
+ * @param {number} id - The ID of the post to fetch.
+ * @param {boolean} [includeAuthor=true] - Whether to include the author's data in the response.
+ * @returns {Promise<Object>} The post data fetched from the API.
+ * @throws {Error} If the ID is not a number or if fetching the post fails.
+ */
+
 export async function readPost(id, includeAuthor = true) {
   const queryParams = new URLSearchParams({
     _author: includeAuthor ? "true" : "false",
@@ -58,6 +77,17 @@ export async function readPost(id, includeAuthor = true) {
     throw error;
   }
 }
+
+/**
+ * API call function to fetch a list of posts created by a specific user, with optional pagination and tagging.
+ *
+ * @param {string} username - The username of the user whose posts to fetch.
+ * @param {number} [limit=12] - The maximum number of posts to return.
+ * @param {number} [page=1] - The page number for pagination.
+ * @param {string} [tag] - An optional tag to filter the posts.
+ * @returns {Promise<Object>} The posts data fetched from the API.
+ * @throws {Error} If fetching posts fails.
+ */
 
 export async function readPostsByUser(username, limit = 12, page = 1, tag) {
   const endpoint = new URL(`${API_SOCIAL_PROFILES}/${username}/posts`);

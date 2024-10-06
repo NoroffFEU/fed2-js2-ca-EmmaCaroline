@@ -2,6 +2,21 @@ import { updatePost } from "../../api/post/update";
 import { readPost } from "../../api/post/read";
 import { load } from "../../api/auth/key";
 
+/**
+ * Handles the submission of the post update form and updates the existing post.
+ *
+ * This function prevents the default form submission behavior and retrieves
+ * the post ID from local storage. It collects the form data and checks if
+ * the post exists. It constructs an object with updated data for the post,
+ * prioritizing user input over existing post values. If a media URL is
+ * provided, it checks for its validity before proceeding. Upon successfully
+ * updating the post, it displays a success message and redirects to the
+ * post page. If an error occurs during the update process, it logs the
+ * error and alerts the user.
+ *
+ * @param {Event} event - The event object representing the form submission.
+ */
+
 export async function onUpdatePost(event) {
   event.preventDefault();
 
@@ -9,35 +24,28 @@ export async function onUpdatePost(event) {
   const id = JSON.parse(localStorage.getItem("postID"));
   const formData = new FormData(event.target);
 
-  // Fetch the existing post data to compare
   const existingPost = await readPost(id);
 
-  // Prepare updated data for the post
   const updatedData = {
-    title: formData.get("title") || existingPost.title, // Use existing title if not updated
-    body: formData.get("body") || existingPost.body, // Use existing body if not updated
+    title: formData.get("title") || existingPost.title,
+    body: formData.get("body") || existingPost.body,
     tags: formData.get("tags")
       ? formData
           .get("tags")
           .split(",")
-          .map((tag) => tag.trim()) // Split and trim tags into an array
+          .map((tag) => tag.trim()) // Splits and trims tags into an array
       : existingPost.tags,
   };
 
-  // Handle media
   const mediaUrl = formData.get("media-url")?.trim();
   const mediaAlt = formData.get("media-alt")?.trim();
 
-  // Only add media to updatedData if the URL is provided or if the existing post has a media URL
   if (mediaUrl || existingPost.media?.url) {
     updatedData.media = {
-      url: mediaUrl || existingPost.media?.url || null, // Use existing URL if no new URL
-      alt: mediaAlt || existingPost.media?.alt || "", // Use existing alt text if not updated
+      url: mediaUrl || existingPost.media?.url || null,
+      alt: mediaAlt || existingPost.media?.alt || "",
     };
   }
-
-  // Debugging: Log the updatedData
-  console.log("Updated Data:", updatedData);
 
   // Check if media URL is provided and valid
   if (updatedData.media?.url && !isValidURL(updatedData.media.url)) {
@@ -65,6 +73,19 @@ function isValidURL(string) {
   }
   return true;
 }
+
+/**
+ * Creates an "Edit post" button for the given post if the current user is the author.
+ *
+ * This function checks if the logged-in user is the author of the post. If they are,
+ * it creates an anchor element styled as a button that links to the post edit page.
+ * The post ID is stored in local storage when the button is clicked to ensure the
+ * correct post is edited. If the current user is not the author, it returns an empty string.
+ *
+ * @param {Object} post - The post object containing the post details.
+ * @param {string} author - The name of the author of the post.
+ * @returns {HTMLAnchorElement|string} The edit button as an anchor element, or an empty string if the user is not the author.
+ */
 
 export const onEditButton = (post, author) => {
   const user = load("user");

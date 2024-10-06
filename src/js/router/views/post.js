@@ -1,39 +1,24 @@
 import { onDeletePost } from "../../ui/post/delete";
 import { onReadSinglePost } from "../../ui/post/read";
 
-/*const editButton = document.getElementById("edit-button-container");
-
-if (!editButton) {
-  console.error("Edit button not found");
-} else {
-  editButton.addEventListener("click", () => {
-    const postID = JSON.parse(localStorage.getItem("postID"));
-
-    if (postID) {
-      console.log("Post ID:", postID);
-      localStorage.setItem("postID", JSON.stringify(postID));
-      window.location.href = "/post/edit/";
-    } else {
-      console.error("No post ID found in local storage");
-    }
-  });
-}
-
-onReadSinglePost();
-onDeletePost();*/
+/**
+ * Initializes the post by reading the single post data and checking for a post ID in local storage.
+ *
+ * This function attempts to read a single post and retrieves its ID from local storage. If the post ID
+ * exists, it logs the ID to the console and updates the local storage. If no post ID is found, it logs an error.
+ *
+ * @returns {Promise<void>} A promise that resolves when the post initialization is complete.
+ * @throws {Error} If reading the single post fails or if an error occurs during initialization.
+ */
 
 async function initializePost() {
   try {
-    // Fetch the single post data
     await onReadSinglePost();
 
-    // Get the post ID from local storage
     const postID = JSON.parse(localStorage.getItem("postID"));
 
-    // Check if the post ID exists
     if (postID) {
       console.log("Post ID:", postID);
-      // Store the post ID in local storage for editing later if needed
       localStorage.setItem("postID", JSON.stringify(postID));
     } else {
       console.error("No post ID found in local storage");
@@ -43,10 +28,8 @@ async function initializePost() {
   }
 }
 
-// Call the initializePost function to set everything up
 initializePost();
 
-// Call delete functionality
 const postID = JSON.parse(localStorage.getItem("postID"));
 if (postID) {
   onDeletePost(postID);

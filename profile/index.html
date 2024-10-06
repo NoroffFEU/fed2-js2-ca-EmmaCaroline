@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
@@ -14,22 +13,24 @@
     </nav>
   </header>
   <body>
-    <h1>Profile</h1>
-    <button id="toggle-button">Update Profile</button>
-    <form name="updateProfile" class="form-container">
-      <label for="avatar-url">Avatar URL</label>
-      <input type="url" name="avatar-url" placeholder="Insert image URL">
-      <label for="avatar-alt">Avatar alt</label>
-      <input type="text" name="avatar-alt" placeholder="Alt text for your image">
-      <label for="banner-url">Banner URL</label>
-      <input type="url" name="banner-url" placeholder="Insert image URL">
-      <label for="banner-alt">Banner alt</label>
-      <input type="text" name="banner-alt" placeholder="Alt text for your image">
-      <label for="bio">Bio</label>
-      <textarea type="text" name="bio" placeholder="Write a bio about yourself"></textarea>
-      <button type="submit">Save Profile</button>
-    </form>
-    <div id="profile-container"></div>
-    <div id="own-posts-container">My posts</div>
+    <main>
+      <h1>Profile</h1>
+      <button id="toggle-button">Update Profile</button>
+      <form name="updateProfile" class="form-container">
+        <label for="avatar-url">Avatar URL</label>
+        <input type="url" name="avatar-url" placeholder="Insert image URL">
+        <label for="avatar-alt">Avatar alt</label>
+        <input type="text" name="avatar-alt" placeholder="Alt text for your image">
+        <label for="banner-url">Banner URL</label>
+        <input type="url" name="banner-url" placeholder="Insert image URL">
+        <label for="banner-alt">Banner alt</label>
+        <input type="text" name="banner-alt" placeholder="Alt text for your image">
+        <label for="bio">Bio</label>
+        <textarea type="text" name="bio" placeholder="Write a bio about yourself"></textarea>
+        <button type="submit">Save Profile</button>
+      </form>
+      <div id="profile-container"></div>
+      <div id="own-posts-container">My posts</div>
+    </main>
   </body>
 </html>

@@ -6,13 +6,10 @@ import { onReadPostsByUser } from "../../ui/post/read";
 
 const form = document.forms.updateProfile;
 
-// Initially hide the form when the page loads
 form.style.display = "none";
 
-//Adds an event listener to save updated form input when clicking Save button
 form.addEventListener("submit", onUpdateProfile);
 
-// Adds an event listener to show the update-form when clicking Update button
 document.getElementById("toggle-button").addEventListener("click", function () {
   const isFormVisible = form.style.display === "flex";
 
