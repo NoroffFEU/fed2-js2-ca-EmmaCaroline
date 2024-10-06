@@ -1,5 +1,6 @@
 import { updatePost } from "../../api/post/update";
 import { readPost } from "../../api/post/read";
+import { load } from "../../api/auth/key";
 
 export async function onUpdatePost(event) {
   event.preventDefault();
@@ -21,29 +22,30 @@ export async function onUpdatePost(event) {
           .split(",")
           .map((tag) => tag.trim()) // Split and trim tags into an array
       : existingPost.tags,
-    media: {
-      url: formData.get("media-url") || existingPost.media?.url || "", // Use existing URL if not updated
-      alt: formData.get("media-alt") || existingPost.media?.alt || "", // Use existing alt text if not updated
-    },
   };
 
-  // Check if there are actual changes
-  const hasChanges =
-    updatedData.title !== existingPost.title ||
-    updatedData.body !== existingPost.body ||
-    JSON.stringify(updatedData.tags) !== JSON.stringify(existingPost.tags) ||
-    updatedData.media.url !== existingPost.media?.url ||
-    updatedData.media.alt !== existingPost.media?.alt;
+  // Handle media
+  const mediaUrl = formData.get("media-url")?.trim();
+  const mediaAlt = formData.get("media-alt")?.trim();
 
-  // If no fields are updated, alert the user and exit
-  if (!hasChanges) {
-    alert(
-      "No changes were made. Please fill out at least one field to update the post."
-    );
-    return; // Exit the function without making an API call
+  // Only add media to updatedData if the URL is provided or if the existing post has a media URL
+  if (mediaUrl || existingPost.media?.url) {
+    updatedData.media = {
+      url: mediaUrl || existingPost.media?.url || null, // Use existing URL if no new URL
+      alt: mediaAlt || existingPost.media?.alt || "", // Use existing alt text if not updated
+    };
   }
 
-  // Proceed with updating the form if there are changes
+  // Debugging: Log the updatedData
+  console.log("Updated Data:", updatedData);
+
+  // Check if media URL is provided and valid
+  if (updatedData.media?.url && !isValidURL(updatedData.media.url)) {
+    alert("Please provide a valid URL for the media.");
+    return; // Exit the function if the URL is invalid
+  }
+
+  // Proceed with updating the form
   try {
     await updatePost(id, updatedData);
     alert("Post updated successfully!");
@@ -53,3 +55,35 @@ export async function onUpdatePost(event) {
     alert("Failed to update the post.");
   }
 }
+
+// Utility function to check if a string is a valid URL
+function isValidURL(string) {
+  try {
+    new URL(string);
+  } catch (_) {
+    return false;
+  }
+  return true;
+}
+
+export const onEditButton = (post, author) => {
+  const user = load("user");
+  const userName = user.name;
+
+  if (author === userName) {
+    const editButton = document.createElement("a");
+    editButton.innerText = "Edit";
+    editButton.setAttribute("href", `/post/edit/?id=${post.id}`);
+    editButton.setAttribute("id", "edit-link");
+    editButton.classList.add("button");
+
+    editButton.addEventListener("click", () => {
+      localStorage.setItem("postID", JSON.stringify(post.id));
+      window.location.href = editButton.getAttribute("href");
+    });
+
+    return editButton;
+  } else {
+    return "";
+  }
+};

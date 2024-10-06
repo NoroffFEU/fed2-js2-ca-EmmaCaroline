@@ -1,6 +1,7 @@
 import { readPosts, readPost, readPostsByUser } from "../../api/post/read";
 import { load } from "../../api/auth/key";
 import { onDeletePost } from "./delete";
+import { onEditButton } from "./update";
 
 async function getPosts(posts) {
   const postsContainer = document.getElementById("posts-container");
@@ -86,12 +87,19 @@ export async function getSinglePost(post) {
     tags.innerText = "No tags";
   }
 
-  postData.append(title, imageContainer, body, tags, username);
+  postData.append(
+    title,
+    imageContainer,
+    body,
+    tags,
+    username,
+    onEditButton(post, post.author.name) // Create the edit button here
+  );
+
   singlePostContainer.append(postData);
 
-  // Store post data in local storage for editing later
-  localStorage.setItem("singlePostData", JSON.stringify(post));
-
+  // Store post ID in local storage for editing later
+  localStorage.setItem("postID", JSON.stringify(post.id)); // Update here
   onDeletePost(post, post.author.name);
 }
 
