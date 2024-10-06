@@ -2,13 +2,16 @@ import { API_SOCIAL_POSTS } from "../constants";
 import { API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../headers";
 
-export async function readPost(id) {
+export async function readPost(id, includeAuthor = true) {
+  const queryParams = new URLSearchParams({
+    _author: includeAuthor ? "true" : "false",
+  });
   if (isNaN(id)) {
     throw new Error("Invalid post ID: must be a number");
   }
 
   try {
-    const endpoint = `${API_SOCIAL_POSTS}/${id}`;
+    const endpoint = `${API_SOCIAL_POSTS}/${id}?${queryParams.toString()}`;
     const response = await fetch(endpoint, {
       headers: headers(),
       method: "GET",
