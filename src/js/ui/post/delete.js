@@ -9,7 +9,7 @@ export async function onDeletePost(post, author) {
 
   // Check if the current user is the author of the post
   if (author === userName) {
-    deleteButton.innerText = "Delete";
+    deleteButton.innerText = "Delete Post";
     deleteButton.setAttribute("id", post.id); // Use post.id directly
     deleteButton.style.display = "block"; // Ensure the button is visible
 

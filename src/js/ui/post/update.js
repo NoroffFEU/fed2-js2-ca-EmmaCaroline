@@ -72,7 +72,7 @@ export const onEditButton = (post, author) => {
 
   if (author === userName) {
     const editButton = document.createElement("a");
-    editButton.innerText = "Edit";
+    editButton.innerText = "Edit post";
     editButton.setAttribute("href", `/post/edit/?id=${post.id}`);
     editButton.setAttribute("id", "edit-link");
     editButton.classList.add("button");

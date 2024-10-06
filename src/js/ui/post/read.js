@@ -24,6 +24,7 @@ async function getPosts(posts) {
     title.textContent = post.title;
 
     const imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
     if (post.media) {
       const image = document.createElement("img");
       image.src = post.media.url;
@@ -70,6 +71,7 @@ export async function getSinglePost(post) {
   title.textContent = post.title;
 
   const imageContainer = document.createElement("div");
+  imageContainer.classList.add("image-container");
   if (post.media && post.media.url) {
     const image = document.createElement("img");
     image.src = post.media.url;
