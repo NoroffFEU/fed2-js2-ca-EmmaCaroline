@@ -22,52 +22,48 @@ async function getPosts(posts) {
   const postsContainer = document.getElementById("posts-container");
   const postByUserContainer = document.getElementById("own-posts-container");
 
-  // Checks if posts is an array before proceeding
+  // Check if posts is an array before proceeding
   if (!Array.isArray(posts)) {
     console.error("Expected posts to be an array, but got: ", posts);
     return; // Exit if posts is not an array
   }
 
   posts.forEach((post) => {
-    const postData = document.createElement("div");
-    postData.classList.add("post-data");
+    // Clone a post template and update its contents
+    const postTemplate = document.querySelector(".post-data").cloneNode(true);
 
-    const username = document.createElement("p");
-    username.textContent = `Posted by: ${post.author.name}`;
+    // Fill in the post data
+    postTemplate.querySelector(".author-name").textContent = post.author.name;
+    postTemplate.querySelector(".post-title").textContent = post.title;
+    postTemplate.querySelector(".post-body").innerText = post.body;
 
-    const title = document.createElement("h2");
-    title.textContent = post.title;
-
-    const imageContainer = document.createElement("div");
-    imageContainer.classList.add("image-container");
+    // If there's media, display the image
     if (post.media) {
-      const image = document.createElement("img");
+      const image = postTemplate.querySelector(".post-image");
       image.src = post.media.url;
-      image.alt = post.media.alt;
-      imageContainer.appendChild(image);
+      image.alt = post.media.alt || "No description provided";
     }
 
-    const body = document.createElement("p");
-    body.innerText = post.body;
+    // Display tags
+    postTemplate.querySelector(".post-tags").innerText =
+      post.tags.join(", ") || "No tags";
 
-    const tags = document.createElement("p");
-    tags.innerText = post.tags;
-
-    const seePostBtn = document.createElement("button");
-    seePostBtn.innerText = "See Post";
-
+    // Handle the "See Post" button click
+    const seePostBtn = postTemplate.querySelector(".see-post-btn");
     seePostBtn.addEventListener("click", () => {
       localStorage.setItem("postID", JSON.stringify(post.id));
       window.location.href = "/post/";
     });
 
-    postData.append(title, imageContainer, username, body, tags, seePostBtn);
-
+    // Append the populated post to the appropriate container
     if (window.location.pathname === "/") {
-      postsContainer.append(postData);
+      postsContainer.appendChild(postTemplate);
     } else if (window.location.pathname === "/profile/") {
-      postByUserContainer.append(postData);
+      postByUserContainer.appendChild(postTemplate);
     }
+
+    // Make the cloned post visible
+    postTemplate.style.display = "block"; // Show the post after cloning
   });
 }
 

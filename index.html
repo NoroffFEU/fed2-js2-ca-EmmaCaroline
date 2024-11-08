@@ -12,7 +12,21 @@
       <h1>Home</h1>
       <a href="/profile/">My Profile</a>
       <button id="logout-btn">Logout</button>
-      <div id="posts-container"></div>
+      <div id="posts-container">
+        <!-- Template for each post -->
+        <div class="post-data" style="display: none">
+          <h2 class="post-title"></h2>
+          <div class="image-container">
+            <img src="" alt="" class="post-image" />
+          </div>
+          <p class="post-body"></p>
+          <p class="post-author">
+            Posted by: <span class="author-name"></span>
+          </p>
+          <p class="post-tags"></p>
+          <button class="see-post-btn">See Post</button>
+        </div>
+      </div>
     </main>
   </body>
 </html>
