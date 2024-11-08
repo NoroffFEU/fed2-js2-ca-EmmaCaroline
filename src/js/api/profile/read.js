@@ -56,25 +56,22 @@ export const readProfileData = async () => {
   const username = user.name;
   const profile = await readProfile(username);
 
-  const profileContainer = document.getElementById("profile-container");
+  // Select existing elements in the DOM
+  const bannerImage = document.getElementById("banner-image");
+  const userName = document.getElementById("user-name");
+  const avatarImage = document.getElementById("avatar-image");
+  const bio = document.getElementById("bio");
 
-  const bannerImage = document.createElement("img");
+  // Update their properties and content
   bannerImage.src = profile.banner?.url || "default-banner.jpg";
   bannerImage.alt = profile.banner?.alt || "Banner Image";
-  bannerImage.className = "banner-image";
 
-  const userName = document.createElement("h2");
   userName.textContent = username;
 
-  const avatarImage = document.createElement("img");
   avatarImage.src = profile.avatar?.url || "default-avatar.jpg";
   avatarImage.alt = profile.avatar?.alt || "Avatar Image";
-  avatarImage.className = "avatar-image";
 
-  const bio = document.createElement("p");
   bio.textContent = profile.bio || "No bio available";
-
-  profileContainer.append(bannerImage, userName, avatarImage, bio);
 };
 
 //export async function readProfiles(limit, page) {} Unused function for now, will add later

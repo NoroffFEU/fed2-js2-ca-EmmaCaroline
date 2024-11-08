@@ -92,51 +92,54 @@ async function getPosts(posts) {
  */
 
 export async function getSinglePost(post) {
-  const singlePostContainer = document.getElementById("single-post-container");
+  const postData = document.getElementById("post-data");
+  const postTitle = document.getElementById("post-title");
+  const imageContainer = document.getElementById("image-container");
+  const postImage = document.getElementById("post-image");
+  const postBody = document.getElementById("post-body");
+  const postTags = document.getElementById("post-tags");
+  const postUsername = document.getElementById("post-username");
+  const editButtonContainer = document.getElementById("edit-button-container");
 
-  const postData = document.createElement("div");
-  postData.classList.add("post-data");
+  // Update post title
+  postTitle.textContent = post.title;
 
-  const username = document.createElement("p");
-  if (post.author) {
-    username.innerText = `Posted by: ${post.author.name}`;
-  }
-
-  const title = document.createElement("h2");
-  title.textContent = post.title;
-
-  const imageContainer = document.createElement("div");
-  imageContainer.classList.add("image-container");
+  // Update image if available
   if (post.media && post.media.url) {
-    const image = document.createElement("img");
-    image.src = post.media.url;
-    image.alt = post.media.alt || "No description provided";
-    imageContainer.appendChild(image);
-  }
-
-  const body = document.createElement("p");
-  body.innerText = post.body || "No content available";
-
-  const tags = document.createElement("p");
-  if (Array.isArray(post.tags) && post.tags.length > 0) {
-    tags.innerText = post.tags.join(", ");
+    postImage.src = post.media.url;
+    postImage.alt = post.media.alt || "No description provided";
+    postImage.style.display = "block"; // Ensure the image is shown if it exists
   } else {
-    tags.innerText = "No tags";
+    postImage.style.display = "none"; // Hide if no image
   }
 
-  postData.append(
-    title,
-    imageContainer,
-    body,
-    tags,
-    username,
-    onEditButton(post, post.author.name)
-  );
+  // Update body text
+  postBody.textContent = post.body || "No content available";
 
-  singlePostContainer.append(postData);
+  // Update tags
+  if (Array.isArray(post.tags) && post.tags.length > 0) {
+    postTags.textContent = post.tags.join(", ");
+  } else {
+    postTags.textContent = "No tags";
+  }
 
+  // Update username if available
+  if (post.author) {
+    postUsername.textContent = `Posted by: ${post.author.name}`;
+  } else {
+    postUsername.textContent = "Author unknown";
+  }
+
+  // Add the edit button if applicable
+  const editButton = onEditButton(post, post.author?.name);
+  if (editButton) {
+    editButtonContainer.innerHTML = ""; // Clear any existing button
+    editButtonContainer.appendChild(editButton);
+  }
+
+  // Store post ID in localStorage and call the delete function
   localStorage.setItem("postID", JSON.stringify(post.id));
-  onDeletePost(post, post.author.name);
+  onDeletePost(post, post.author?.name);
 }
 
 /**
