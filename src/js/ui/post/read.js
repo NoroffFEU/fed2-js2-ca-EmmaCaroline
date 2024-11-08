@@ -92,54 +92,45 @@ async function getPosts(posts) {
  */
 
 export async function getSinglePost(post) {
-  const postData = document.getElementById("post-data");
-  const postTitle = document.getElementById("post-title");
-  const imageContainer = document.getElementById("image-container");
-  const postImage = document.getElementById("post-image");
-  const postBody = document.getElementById("post-body");
-  const postTags = document.getElementById("post-tags");
-  const postUsername = document.getElementById("post-username");
-  const editButtonContainer = document.getElementById("edit-button-container");
+  const singlePostContainer = document.getElementById("single-post-container");
+  // Get the container where the post data will be displayed
+  const postTitleElement = document.getElementById("post-title");
+  const postBodyElement = document.getElementById("post-body");
+  const postTagsElement = document.getElementById("post-tags");
+  const postAuthorElement = document.getElementById("post-author");
+  const postImageContainerElement = document.getElementById(
+    "post-image-container"
+  );
 
-  // Update post title
-  postTitle.textContent = post.title;
+  // Populate the elements with data from the post
+  postTitleElement.textContent = post.title;
 
-  // Update image if available
-  if (post.media && post.media.url) {
-    postImage.src = post.media.url;
-    postImage.alt = post.media.alt || "No description provided";
-    postImage.style.display = "block"; // Ensure the image is shown if it exists
-  } else {
-    postImage.style.display = "none"; // Hide if no image
-  }
+  postBodyElement.innerHTML = post.body || "No content available";
 
-  // Update body text
-  postBody.textContent = post.body || "No content available";
-
-  // Update tags
   if (Array.isArray(post.tags) && post.tags.length > 0) {
-    postTags.textContent = post.tags.join(", ");
+    postTagsElement.innerText = `Tags: ${post.tags.join(", ")}`;
   } else {
-    postTags.textContent = "No tags";
+    postTagsElement.innerText = "No tags";
   }
 
-  // Update username if available
   if (post.author) {
-    postUsername.textContent = `Posted by: ${post.author.name}`;
-  } else {
-    postUsername.textContent = "Author unknown";
+    postAuthorElement.innerText = `Posted by: ${post.author.name}`;
   }
 
-  // Add the edit button if applicable
-  const editButton = onEditButton(post, post.author?.name);
-  if (editButton) {
-    editButtonContainer.innerHTML = ""; // Clear any existing button
-    editButtonContainer.appendChild(editButton);
+  if (post.media && post.media.url) {
+    const image = document.createElement("img");
+    image.src = post.media.url;
+    image.alt = post.media.alt || "No description provided";
+    postImageContainerElement.appendChild(image);
   }
 
-  // Store post ID in localStorage and call the delete function
+  singlePostContainer.appendChild(onEditButton(post, post.author.name));
+
+  // Set the post ID in localStorage
   localStorage.setItem("postID", JSON.stringify(post.id));
-  onDeletePost(post, post.author?.name);
+
+  // Call the delete function (existing delete logic remains unchanged)
+  onDeletePost(post, post.author.name);
 }
 
 /**
