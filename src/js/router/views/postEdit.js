@@ -1,6 +1,7 @@
 import { authGuard } from "../../utilities/authGuard";
 import { onUpdatePost } from "../../ui/post/update";
 import { readPost } from "../../api/post/read";
+import { setLogoutListener } from "../../ui/global/logout";
 
 const form = document.forms.editPost;
 
@@ -29,3 +30,5 @@ if (postID) {
 }
 
 authGuard();
+
+setLogoutListener();

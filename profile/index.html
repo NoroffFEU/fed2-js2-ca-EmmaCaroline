@@ -5,11 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/7f993fe397.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <header>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/post/create/">Create post</a>
+  <header class="bg-green-50 shadow-lg mb-16">
+    <nav class="container mx-auto">
+      <div class="flex justify-between" id="navbar">
+        <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
+          <img
+            src="/images/logo-image.jpg"
+            alt="Fictional Social Media Logo"
+            class="w-32 h-32 rounded"
+          />
+        </a>
+
+        <div class="hidden md:flex items-center pr-10" id="menu-desktop">
+          <a
+            href="/"
+            class="my-2 mx-6 font-medium text-lg text-gray-600 hover:text-gray-950"
+            >Home</a
+          >
+          <a
+            href="/profile/"
+            class="my-2 mx-6 font-medium text-lg text-gray-600 underline hover:text-gray-950"
+            >Profile</a
+          >
+          <button
+            id="logout-btn"
+            class="py-2 mx-4 px-4 font-medium text-lg text-gray-600 border border-gray-400 rounded hover:text-gray-950"
+          >
+            Logout
+          </button>
+        </div>
+
+        <div class="flex px-6 md:hidden items-center" id="hamburger-icon">
+          <button class="" id="menu-btn">
+            <i class="fa-solid fa-bars text-3xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="hidden bg-white border-t py-4 px-6" id="mobile-menu">
+        <ul class="">
+          <li class="py-2 font-medium text-lg text-gray-600">
+            <a href="/" class="">Home</a>
+          </li>
+          <li class="py-2 font-medium text-lg text-gray-600 underline">
+            <a href="/profile/" class="">Profile</a>
+          </li>
+          <li class="py-2 font-medium text-lg text-gray-600">
+            <button id="logout-btn" class="">Logout</button>
+          </li>
+        </ul>
+      </div>
     </nav>
   </header>
   <body class="box-border m-0">

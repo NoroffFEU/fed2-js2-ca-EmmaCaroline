@@ -1,5 +1,6 @@
 import { onDeletePost } from "../../ui/post/delete";
 import { onReadSinglePost } from "../../ui/post/read";
+import { setLogoutListener } from "../../ui/global/logout";
 
 /**
  * Initializes the post by reading the single post data and checking for a post ID in local storage.
@@ -34,3 +35,5 @@ const postID = JSON.parse(localStorage.getItem("postID"));
 if (postID) {
   onDeletePost(postID);
 }
+
+setLogoutListener();
