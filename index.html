@@ -9,6 +9,10 @@
       src="https://kit.fontawesome.com/7f993fe397.js"
       crossorigin="anonymous"
     ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="box-border m-0">
     <header class="bg-green-50 shadow-lg mb-16">
@@ -18,24 +22,23 @@
             <img
               src="/images/logo-image.jpg"
               alt="Fictional Social Media Logo"
-              class="w-32 h-32 rounded"
+              class="w-24 h-24 rounded md:w-32 md:h-32"
             />
           </a>
 
           <div class="hidden md:flex items-center pr-10" id="menu-desktop">
             <a
               href="/"
-              class="my-2 mx-6 font-medium text-lg text-gray-600 underline hover:text-gray-950"
+              class="font-heading my-2 mx-6 font-medium text-lg text-gray-600 underline hover:text-gray-950"
               >Home</a
             >
             <a
               href="/profile/"
-              class="my-2 mx-6 font-medium text-lg text-gray-600 hover:text-gray-950"
+              class="font-heading my-2 mx-6 font-medium text-lg text-gray-600 hover:text-gray-950"
               >Profile</a
             >
             <button
-              id="logout-btn"
-              class="py-2 mx-4 px-4 font-medium text-lg text-gray-600 border border-gray-400 rounded hover:text-gray-950"
+              class="logout-btn font-heading py-2 mx-4 px-4 font-medium text-lg text-gray-600 border border-gray-400 rounded hover:text-gray-950"
             >
               Logout
             </button>
@@ -50,33 +53,35 @@
 
         <div class="hidden bg-white border-t py-4 px-6" id="mobile-menu">
           <ul class="">
-            <li class="py-2 font-medium text-lg text-gray-600 underline">
+            <li
+              class="font-heading py-2 font-medium text-lg text-gray-600 underline"
+            >
               <a href="/" class="">Home</a>
             </li>
-            <li class="py-2 font-medium text-lg text-gray-600">
+            <li class="font-heading py-2 font-medium text-lg text-gray-600">
               <a href="/profile/" class="">Profile</a>
             </li>
-            <li class="py-2 font-medium text-lg text-gray-600">
-              <button id="logout-btn" class="">Logout</button>
+            <li class="font-heading py-2 font-medium text-lg text-gray-600">
+              <button class="logout-btn">Logout</button>
             </li>
           </ul>
         </div>
       </nav>
     </header>
     <main>
-      <h1>Home</h1>
+      <h1 class="font-heading">Posts</h1>
       <div id="posts-container" class="">
         <!-- Template for each post -->
         <div class="post-data" style="display: none">
-          <h2 class="post-title"></h2>
+          <h2 class="post-title font-heading"></h2>
           <div class="image-container">
             <img src="" alt="" class="post-image" />
           </div>
-          <p class="post-body"></p>
-          <p class="post-author">
-            Posted by: <span class="author-name"></span>
+          <p class="post-body font-body"></p>
+          <p class="post-author font-body">
+            Posted by: <span class="author-name font-body"></span>
           </p>
-          <p class="post-tags"></p>
+          <p class="post-tags font-body"></p>
           <button class="see-post-btn">See Post</button>
         </div>
       </div>
