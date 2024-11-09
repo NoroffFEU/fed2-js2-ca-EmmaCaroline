@@ -42,22 +42,37 @@
         <button type="submit">Save Profile</button>
       </form>
       <div id="profile-container">
-        <img
-          id="banner-image"
-          class="banner-image"
-          alt="Banner Image"
-          src="default-banner.jpg"
-        />
+        <div class="relative w-full h-36 sm:h-72 md:h-96 lg:h-112">
+          <img
+            id="banner-image"
+            class="absolute inset-0 w-full h-full object-cover"
+            alt="Banner Image"
+            src="default-banner.jpg"
+          />
+        </div>
         <h2 id="user-name">Username</h2>
         <img
           id="avatar-image"
-          class="avatar-image"
+          class="avatar-image w-20 h-20 rounded-full"
           alt="Avatar Image"
           src="default-avatar.jpg"
         />
         <p id="bio">No bio available</p>
       </div>
-      <div id="own-posts-container">My posts</div>
+      <div id="own-posts-container">
+        <div class="post-data" style="display: none">
+          <h2 class="post-title"></h2>
+          <div class="image-container">
+            <img src="" alt="" class="post-image" />
+          </div>
+          <p class="post-body"></p>
+          <p class="post-author">
+            Posted by: <span class="author-name"></span>
+          </p>
+          <p class="post-tags"></p>
+          <button class="see-post-btn">See Post</button>
+        </div>
+      </div>
     </main>
   </body>
 </html>
