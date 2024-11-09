@@ -20,8 +20,10 @@
       rel="stylesheet"
     />
   </head>
-  <body class="box-border m-0">
-    <header class="bg-green-50 shadow-lg mb-16">
+  <body class="box-border m-0 dark:bg-gray-950">
+    <header
+      class="bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
       <nav class="container mx-auto">
         <div class="flex justify-between" id="navbar">
           <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
@@ -35,60 +37,79 @@
           <div class="hidden md:flex items-center pr-10" id="menu-desktop">
             <a
               href="/"
-              class="font-heading my-2 mx-6 font-medium text-lg text-gray-600 underline hover:text-gray-950"
+              class="font-heading my-2 mx-6 font-semibold text-lg text-gray-600 underline dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
               >Home</a
             >
             <a
               href="/profile/"
-              class="font-heading my-2 mx-6 font-medium text-lg text-gray-600 hover:text-gray-950"
+              class="font-heading my-2 mx-6 font-semibold text-lg text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
               >Profile</a
             >
             <button
-              class="logout-btn font-heading py-2 mx-4 px-4 font-medium text-lg text-gray-600 border border-gray-400 rounded hover:text-gray-950"
+              class="logout-btn font-heading py-2 mx-4 px-4 font-semibold text-lg text-gray-600 border border-gray-400 rounded dark:text-gray-400 hover:text-gray-950 hover:border-gray-950 dark:hover:text-gray-100 dark:hover:border-gray-100"
             >
               Logout
             </button>
           </div>
 
-          <div class="flex px-6 md:hidden items-center" id="hamburger-icon">
-            <button class="" id="menu-btn">
-              <i class="fa-solid fa-bars text-3xl"></i>
-            </button>
+          <div class="flex justify-between">
+            <div class="flex px-4 items-center">
+              <button id="theme-toggle" class="my-2 mx-6 text-xl">
+                <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
+                <i id="moon" class="fa-solid fa-moon text-white"></i>
+              </button>
+            </div>
+
+            <div class="flex px-4 md:hidden items-center" id="hamburger-icon">
+              <button class="" id="menu-btn">
+                <i class="fa-solid fa-bars text-3xl dark:text-white"></i>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="hidden bg-white border-t py-4 px-6" id="mobile-menu">
+        <div
+          class="hidden bg-white border-t py-4 px-6 dark:bg-black dark:border-gray-700"
+          id="mobile-menu"
+        >
           <ul class="">
             <li
-              class="font-heading py-2 font-medium text-lg text-gray-600 underline"
+              class="font-heading py-2 font-semibold text-lg text-gray-600 underline dark:text-gray-400"
             >
               <a href="/" class="">Home</a>
             </li>
-            <li class="font-heading py-2 font-medium text-lg text-gray-600">
+            <li
+              class="font-heading py-2 font-semibold text-lg text-gray-600 dark:text-gray-400"
+            >
               <a href="/profile/" class="">Profile</a>
             </li>
-            <li class="font-heading py-2 font-medium text-lg text-gray-600">
+            <li
+              class="font-heading py-2 font-semibold text-lg text-gray-600 dark:text-gray-400"
+            >
               <button class="logout-btn">Logout</button>
             </li>
           </ul>
         </div>
       </nav>
     </header>
-    <main>
-      <h1 class="font-heading">Posts</h1>
+    <main class="px-4 pt-16">
+      <h1 class="font-heading text-xl uppercase pb-10">All posts</h1>
       <div id="posts-container" class="">
         <!-- Template for each post -->
-        <div class="post-data" style="display: none">
-          <h2 class="post-title font-heading"></h2>
+        <div class="post-data pb-10" style="display: none">
+          <h2 class="post-title font-heading text-lg"></h2>
           <div class="image-container">
             <img src="" alt="" class="post-image" />
           </div>
-          <p class="post-body font-body"></p>
-          <p class="post-author font-body">
-            Posted by: <span class="author-name font-body"></span>
+          <p class="post-body font-body text-sm"></p>
+          <p class="post-author font-body text-sm">
+            Posted by:
+            <span class="author-name font-body text-sm font-medium"></span>
           </p>
-          <p class="post-tags font-body"></p>
-          <button class="see-post-btn">See Post</button>
+          <p class="post-tags font-body text-sm"></p>
+          <button class="see-post-btn border rounded mt-2 py-2 px-4">
+            See Post
+          </button>
         </div>
       </div>
     </main>
