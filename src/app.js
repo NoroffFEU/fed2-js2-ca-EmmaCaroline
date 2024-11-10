@@ -4,12 +4,18 @@ import router from "./js/router";
 
 await router(window.location.pathname);
 
-const profileBtn = document.querySelector("#menu-btn");
-const profileMenu = document.querySelector("#profile-menu");
+if (
+  !["/auth/", "/auth/register/", "/auth/login/"].includes(
+    window.location.pathname
+  )
+) {
+  const profileBtn = document.querySelector("#menu-btn");
+  const profileMenu = document.querySelector("#profile-menu");
 
-profileBtn.addEventListener("click", () => {
-  profileMenu.classList.toggle("hidden");
-});
+  profileBtn.addEventListener("click", () => {
+    profileMenu.classList.toggle("hidden");
+  });
+}
 
 // Apply initial theme
 function applyInitialTheme() {
