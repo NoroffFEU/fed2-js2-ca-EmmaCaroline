@@ -30,7 +30,7 @@ async function getPosts(posts) {
     return; // Exit if posts is not an array
   }
 
-  posts.forEach((post) => {
+  /*posts.forEach((post) => {
     // Clone a post template and update its contents
     const postTemplate = document.querySelector(".post-data").cloneNode(true);
 
@@ -66,6 +66,71 @@ async function getPosts(posts) {
       localStorage.setItem("postID", JSON.stringify(post.id));
       window.location.href = "/post/";
     });
+
+    // Append the populated post to the appropriate container
+    if (window.location.pathname === "/") {
+      postsContainer.appendChild(postTemplate);
+    } else if (window.location.pathname === "/profile/") {
+      postByUserContainer.appendChild(postTemplate);
+    }
+
+    // Make the cloned post visible
+    postTemplate.style.display = "block"; // Show the post after cloning
+  });*/
+
+  posts.forEach((post) => {
+    // Clone a post template and update its contents
+    const postTemplate = document.querySelector(".post-data").cloneNode(true);
+
+    // Fill in the post data
+    postTemplate.querySelector(".author-name").textContent = post.author.name;
+    postTemplate.querySelector(".post-title").textContent = post.title;
+    postTemplate.querySelector(".post-body").innerText = post.body;
+
+    // Select the image element and its container
+    const image = postTemplate.querySelector(".post-image");
+    const imageContainer = image.parentElement; // This is the container holding the image
+
+    // If there's media, display the image
+    if (post.media && post.media.url) {
+      image.src = post.media.url;
+      image.alt = post.media.alt || "No description provided";
+      image.style.display = "block"; // Ensure image is displayed if present
+      imageContainer.style.cursor = "pointer"; // Set cursor pointer for clickable container
+    } else {
+      image.style.display = "none"; // Hide the image if no media
+      imageContainer.style.cursor = "default"; // Remove cursor pointer when no image
+    }
+
+    const tagsContainer = postTemplate.querySelector(".post-tags");
+    tagsContainer.innerHTML = ""; // Clear any existing content
+
+    if (post.tags.length > 0) {
+      post.tags.forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.textContent = `#${tag}`;
+        tagElement.className =
+          "inline-block bg-blue-100 text-blue-600 rounded-full px-2 py-1 text-xs font-semibold truncate";
+        tagsContainer.appendChild(tagElement);
+      });
+    } else {
+      tagsContainer.textContent = "";
+    }
+
+    // Function to handle the click event
+    const handleClick = () => {
+      localStorage.setItem("postID", JSON.stringify(post.id));
+      window.location.href = "/post/";
+    };
+
+    // Make the title clickable
+    const title = postTemplate.querySelector(".post-title");
+    title.addEventListener("click", handleClick);
+
+    // Make the image clickable if it exists
+    if (image.style.display !== "none") {
+      image.addEventListener("click", handleClick);
+    }
 
     // Append the populated post to the appropriate container
     if (window.location.pathname === "/") {
