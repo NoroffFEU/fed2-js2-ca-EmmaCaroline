@@ -8,9 +8,9 @@
  * @returns {void}
  */
 
-export function authGuard() {
+/*export function authGuard() {
   if (!localStorage.token) {
     alert("You must be logged in to view this page");
     window.location.href = "/auth/login/";
   }
-}
+} Removed, but might use later*/
