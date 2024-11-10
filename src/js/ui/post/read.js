@@ -40,8 +40,8 @@ async function getPosts(posts) {
     postTemplate.querySelector(".post-body").innerText = post.body;
 
     // If there's media, display the image
+    const image = postTemplate.querySelector(".post-image");
     if (post.media) {
-      const image = postTemplate.querySelector(".post-image");
       image.src = post.media.url;
       image.alt = post.media.alt || "No description provided";
     }
@@ -62,7 +62,7 @@ async function getPosts(posts) {
     }
 
     // Make the whole card clickable
-    postTemplate.addEventListener("click", () => {
+    image.addEventListener("click", () => {
       localStorage.setItem("postID", JSON.stringify(post.id));
       window.location.href = "/post/";
     });

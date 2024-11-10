@@ -13,13 +13,16 @@ form.addEventListener("submit", onUpdateProfile);
 
 document.getElementById("toggle-button").addEventListener("click", function () {
   const isFormVisible = form.style.display === "flex";
+  const cancelUpdate = document.getElementById("cancel-update");
 
   if (isFormVisible) {
     form.style.display = "none";
-    this.textContent = "Update Profile";
   } else {
     form.style.display = "flex";
-    this.textContent = "Cancel Update";
+    cancelUpdate.textContent = "Cancel Update";
+    cancelUpdate.addEventListener("click", function () {
+      window.location.href = "/profile/";
+    });
 
     prefillProfileForm();
   }

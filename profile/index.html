@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,7 +42,8 @@
     </header>
     <main>
       <h1 class="hidden">Profile</h1>
-      <form name="updateProfile" class="form-container">
+      <form name="updateProfile" class="form-container" id="toggle-form">
+        <button id="cancel-update" class=""></button>
         <label for="avatar-url">Avatar URL</label>
         <input type="url" name="avatar-url" placeholder="Insert image URL" />
         <label for="avatar-alt">Avatar alt</label>
@@ -72,22 +73,23 @@
           <img
             id="banner-image"
             class="absolute inset-0 w-full h-full object-cover"
-            alt="Banner Image"
-            src="default-banner.jpg"
+            alt=""
+            src=""
           />
+          <!--default-banner.jpg-->
         </div>
-        <button id="toggle-button">Update Profile</button>
 
         <div class="flex justify-center">
           <img
             id="avatar-image"
             class="avatar-image w-20 h-20 rounded-full"
-            alt="Avatar Image"
-            src="default-avatar.jpg"
+            alt=""
+            src=""
           />
+          <!--default-avatar.jpg-->
         </div>
         <h2 id="user-name" class="flex justify-center mb-4"></h2>
-        <p id="bio" class="mb-4 px-6 flex justify-center">No bio available</p>
+        <p id="bio" class="mb-4 px-6 flex justify-center"></p>
       </div>
       <div
         id="own-posts-container"
@@ -114,6 +116,17 @@
               <p
                 class="post-tags flex flex-wrap gap-2 overflow-hidden truncate max-h-[2rem]"
               ></p>
+              <div
+                class="heart-icon absolute bottom-2 right-4 text-black hover:text-red-500 transition-colors cursor-pointer"
+              >
+                <i class="fa-regular fa-heart"></i>
+              </div>
+              <div
+                class="commenticon absolute bottom-2 right-12 cursor-pointer"
+                id="comment-icon"
+              >
+                <i class="fa-regular fa-comment"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -131,17 +144,33 @@
           >
             <i class="fa-solid fa-house text-lg"></i>
           </a>
-          <a
-            href="/profile/"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
-            aria-label="Profile"
-            ><i class="fa-solid fa-user text-lg"></i
-          ></a>
+          <div class="flex items-center">
+            <button
+              id="menu-btn"
+              class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+              aria-label="Profile"
+            >
+              <i class="fa-solid fa-user text-lg"></i>
+            </button>
+          </div>
           <button
             class="logout-btn font-heading text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
           >
             <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
           </button>
+        </div>
+        <div
+          class="hidden absolute bottom-14 left-0 right-0 z-50 bg-green-50 shadow-lg rounded-md border-t-2 text-center py-6 transform transition-transform duration-300 ease-out"
+          id="profile-menu"
+        >
+          <ul class="space-y-4">
+            <li>
+              <a href="/profile/" class="block">Profile</a>
+              <a href="/profile/#toggle-form" id="toggle-button" class="block"
+                >Update profile</a
+              >
+            </li>
+          </ul>
         </div>
       </nav>
     </footer>
