@@ -11,24 +11,6 @@ form.style.display = "none";
 
 form.addEventListener("submit", onUpdateProfile);
 
-/*document
-  .getElementById("toggle-update-button")
-  .addEventListener("click", function () {
-    const isFormVisible = form.style.display === "flex";
-    const cancelUpdate = document.getElementById("cancel-update");
-
-    if (isFormVisible) {
-      form.style.display = "none";
-    } else {
-      form.style.display = "flex";
-      cancelUpdate.textContent = "Cancel Update";
-      cancelUpdate.addEventListener("click", function () {
-        window.location.href = "/profile/";
-      });
-
-      prefillProfileForm();
-    }
-  });*/
 document.getElementById("toggle-button").addEventListener("click", function () {
   const isFormVisible = form.style.display === "flex";
 

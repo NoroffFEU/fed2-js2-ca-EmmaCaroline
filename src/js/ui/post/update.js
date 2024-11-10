@@ -87,24 +87,6 @@ function isValidURL(string) {
  * @returns {HTMLAnchorElement|string} The edit button as an anchor element, or an empty string if the user is not the author.
  */
 
-/*export const onEditButton = (post, author) => {
-  const user = load("user");
-  const userName = user.name;
-
-  const editButton = document.getElementById("edit-post-button-container");
-
-  if (author === userName) {
-    editButton.innerText = "Edit Post";
-    editButton.setAttribute("id", post.id);
-    editButton.style.display = "block";
-  }
-
-  editButton.addEventListener("click", () => {
-    localStorage.setItem("postID", JSON.stringify(post.id));
-    window.location.href = `/post/edit/?id=${post.id}`;
-  });
-};*/
-
 export const onEditButton = (post, author) => {
   const user = load("user");
   const userName = user?.name;
