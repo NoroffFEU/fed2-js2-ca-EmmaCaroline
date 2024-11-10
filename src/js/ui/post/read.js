@@ -116,7 +116,7 @@ async function getPosts(posts) {
  * @param {Array<string>} post.tags - An array of tags associated with the post.
  */
 
-export async function getSinglePost(post) {
+/*export async function getSinglePost(post) {
   const singlePostContainer = document.getElementById("single-post-container");
   if (!singlePostContainer) {
     console.error("Single post container not found!");
@@ -151,6 +151,81 @@ export async function getSinglePost(post) {
     postTagsElement.innerText = `Tags: ${post.tags.join(", ")}`;
   } else {
     postTagsElement.innerText = "No tags";
+  }
+
+  if (post.author) {
+    postAuthorElement.innerText = `Posted by: ${post.author.name}`;
+  }
+
+  // Add image if present
+  if (post.media && post.media.url) {
+    const image = document.createElement("img");
+    image.src = post.media.url;
+    image.alt = post.media.alt || "No description provided";
+    postImageContainerElement.innerHTML = ""; // Clear existing content
+    postImageContainerElement.appendChild(image);
+  } else {
+    postImageContainerElement.innerHTML = ""; // Clear if no image
+  }
+
+  // Append the "Edit Post" button if the user is the author
+  const editButton = onEditButton(post, post.author.name);
+  if (editButton && editButton instanceof Node) {
+    singlePostContainer.appendChild(editButton);
+  }
+
+  // Set the post ID in localStorage
+  localStorage.setItem("postID", JSON.stringify(post.id));
+
+  // Call the delete function (existing delete logic remains unchanged)
+  onDeletePost(post, post.author.name);
+}*/
+
+export async function getSinglePost(post) {
+  const singlePostContainer = document.getElementById("single-post-container");
+  if (!singlePostContainer) {
+    console.error("Single post container not found!");
+    return;
+  }
+
+  // Get the container where the post data will be displayed
+  const postTitleElement = document.getElementById("post-title");
+  const postBodyElement = document.getElementById("post-body");
+  const postTagsElement = document.getElementById("post-tags");
+  const postAuthorElement = document.getElementById("post-author");
+  const postImageContainerElement = document.getElementById(
+    "post-image-container"
+  );
+
+  if (
+    !postTitleElement ||
+    !postBodyElement ||
+    !postTagsElement ||
+    !postAuthorElement ||
+    !postImageContainerElement
+  ) {
+    console.error("One or more post elements are not found!");
+    return;
+  }
+
+  // Populate the elements with data from the post
+  postTitleElement.textContent = post.title;
+  postBodyElement.innerHTML = post.body || "No content available";
+
+  // Clear any existing tags
+  postTagsElement.innerHTML = "";
+
+  // Populate the tags with the same styling as in `getPosts`
+  if (Array.isArray(post.tags) && post.tags.length > 0) {
+    post.tags.forEach((tag) => {
+      const tagElement = document.createElement("span");
+      tagElement.textContent = `#${tag}`;
+      tagElement.className =
+        "inline-block bg-blue-100 text-blue-600 rounded-full px-2 py-1 text-xs font-semibold truncate";
+      postTagsElement.appendChild(tagElement);
+    });
+  } else {
+    postTagsElement.textContent = "";
   }
 
   if (post.author) {
