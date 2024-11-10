@@ -17,20 +17,74 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <main>
-      <h1>Login</h1>
-      <form name="login">
-        <div>
-          <label for="email">Email</label>
-          <input id="email" type="email" name="email" required />
+  <body class="box-border m-0 dark:bg-gray-950">
+    <header
+      class="bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto">
+        <div class="flex justify-between" id="navbar">
+          <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
+            <img
+              src="/images/logo-image.jpg"
+              alt="Fictional Social Media Logo"
+              class="w-14 h-14 rounded md:w-24 md:h-24"
+            />
+          </a>
+
+          <div class="flex justify-between pr-8 items-center">
+            <button id="theme-toggle" class="my-2 mx-6 text-xl">
+              <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
+              <i id="moon" class="fa-solid fa-moon text-white"></i>
+            </button>
+          </div>
         </div>
-        <div>
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" required />
+      </nav>
+    </header>
+    <main class="py-10">
+      <h1 class="hidden">Login</h1>
+      <form
+        name="login"
+        class="login-form max-w-sm mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-300 font-body dark:bg-gray-900"
+      >
+        <div class="mb-4">
+          <label
+            for="email"
+            class="block text-sm font-semibold text-gray-700 mb-2 font-heading dark:text-gray-200"
+            >Email</label
+          >
+          <input
+            id="email"
+            type="email"
+            name="email"
+            required
+            class="w-full p-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-100 dark:bg-gray-800 dark:text-gray-100"
+          />
         </div>
-        <a href="/auth/register/">Register</a>
-        <button type="submit">Login</button>
+        <div class="mb-4">
+          <label
+            for="password"
+            class="block text-sm font-semibold text-gray-700 mb-2 font-heading dark:text-gray-200"
+            >Password</label
+          >
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            class="w-full p-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-100 dark:bg-gray-800 dark:text-gray-100"
+          />
+        </div>
+        <a
+          href="/auth/register/"
+          class="block text-sm text-blue-500 hover:underline mb-4"
+          >Register</a
+        >
+        <button
+          type="submit"
+          class="w-auto btn btn.primary dark:bg-gray-800 dark:text-gray-200"
+        >
+          Login
+        </button>
       </form>
     </main>
   </body>

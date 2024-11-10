@@ -17,7 +17,7 @@
 
   /* Button variants */
   .btn-primary {
-    @apply bg-gray-200;
+    @apply bg-gray-200 ;
   }
 
   .btn-secondary {
