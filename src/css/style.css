@@ -12,7 +12,7 @@
 @layer components { 
   /* Base button styles */
   .btn {
-    @apply font-medium text-sm py-1 px-2 border border-gray-500 rounded;
+    @apply font-medium text-sm py-1 px-2 border border-gray-500 rounded ;
   }
 
   /* Button variants */

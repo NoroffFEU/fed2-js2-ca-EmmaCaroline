@@ -30,54 +30,6 @@ async function getPosts(posts) {
     return; // Exit if posts is not an array
   }
 
-  /*posts.forEach((post) => {
-    // Clone a post template and update its contents
-    const postTemplate = document.querySelector(".post-data").cloneNode(true);
-
-    // Fill in the post data
-    postTemplate.querySelector(".author-name").textContent = post.author.name;
-    postTemplate.querySelector(".post-title").textContent = post.title;
-    postTemplate.querySelector(".post-body").innerText = post.body;
-
-    // If there's media, display the image
-    const image = postTemplate.querySelector(".post-image");
-    if (post.media) {
-      image.src = post.media.url;
-      image.alt = post.media.alt || "No description provided";
-    }
-
-    const tagsContainer = postTemplate.querySelector(".post-tags");
-    tagsContainer.innerHTML = ""; // Clear any existing content
-
-    if (post.tags.length > 0) {
-      post.tags.forEach((tag) => {
-        const tagElement = document.createElement("span");
-        tagElement.textContent = `#${tag}`;
-        tagElement.className =
-          "inline-block bg-blue-100 text-blue-600 rounded-full px-2 py-1 text-xs font-semibold truncate";
-        tagsContainer.appendChild(tagElement);
-      });
-    } else {
-      tagsContainer.textContent = "";
-    }
-
-    // Make the whole card clickable
-    image.addEventListener("click", () => {
-      localStorage.setItem("postID", JSON.stringify(post.id));
-      window.location.href = "/post/";
-    });
-
-    // Append the populated post to the appropriate container
-    if (window.location.pathname === "/") {
-      postsContainer.appendChild(postTemplate);
-    } else if (window.location.pathname === "/profile/") {
-      postByUserContainer.appendChild(postTemplate);
-    }
-
-    // Make the cloned post visible
-    postTemplate.style.display = "block"; // Show the post after cloning
-  });*/
-
   posts.forEach((post) => {
     // Clone a post template and update its contents
     const postTemplate = document.querySelector(".post-data").cloneNode(true);
@@ -166,6 +118,11 @@ async function getPosts(posts) {
 
 export async function getSinglePost(post) {
   const singlePostContainer = document.getElementById("single-post-container");
+  if (!singlePostContainer) {
+    console.error("Single post container not found!");
+    return;
+  }
+
   // Get the container where the post data will be displayed
   const postTitleElement = document.getElementById("post-title");
   const postBodyElement = document.getElementById("post-body");
@@ -175,9 +132,19 @@ export async function getSinglePost(post) {
     "post-image-container"
   );
 
+  if (
+    !postTitleElement ||
+    !postBodyElement ||
+    !postTagsElement ||
+    !postAuthorElement ||
+    !postImageContainerElement
+  ) {
+    console.error("One or more post elements are not found!");
+    return;
+  }
+
   // Populate the elements with data from the post
   postTitleElement.textContent = post.title;
-
   postBodyElement.innerHTML = post.body || "No content available";
 
   if (Array.isArray(post.tags) && post.tags.length > 0) {
@@ -190,14 +157,22 @@ export async function getSinglePost(post) {
     postAuthorElement.innerText = `Posted by: ${post.author.name}`;
   }
 
+  // Add image if present
   if (post.media && post.media.url) {
     const image = document.createElement("img");
     image.src = post.media.url;
     image.alt = post.media.alt || "No description provided";
+    postImageContainerElement.innerHTML = ""; // Clear existing content
     postImageContainerElement.appendChild(image);
+  } else {
+    postImageContainerElement.innerHTML = ""; // Clear if no image
   }
 
-  singlePostContainer.appendChild(onEditButton(post, post.author.name));
+  // Append the "Edit Post" button if the user is the author
+  const editButton = onEditButton(post, post.author.name);
+  if (editButton && editButton instanceof Node) {
+    singlePostContainer.appendChild(editButton);
+  }
 
   // Set the post ID in localStorage
   localStorage.setItem("postID", JSON.stringify(post.id));

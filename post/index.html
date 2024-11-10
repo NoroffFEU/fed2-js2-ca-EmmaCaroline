@@ -17,23 +17,117 @@
       rel="stylesheet"
     />
   </head>
-  <header>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/profile/">Profile</a>
-    </nav>
-  </header>
-  <body class="box-border m-0">
+
+  <body class="box-border m-0 dark:bg-gray-950">
+    <header
+      class="bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto">
+        <div class="flex justify-between" id="navbar">
+          <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
+            <img
+              src="/images/logo-image.jpg"
+              alt="Fictional Social Media Logo"
+              class="w-14 h-14 rounded md:w-24 md:h-24"
+            />
+          </a>
+
+          <div class="flex justify-between pr-8 items-center">
+            <button id="theme-toggle" class="my-2 mx-6 text-xl">
+              <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
+              <i id="moon" class="fa-solid fa-moon text-white"></i>
+            </button>
+            <button class="searchicon items-center relative">
+              <i
+                class="fa-solid fa-magnifying-glass cursor-pointer"
+                id="search-icon"
+              ></i>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search posts..."
+                class="pl-2 border rounded hidden absolute right-[-80%] top-[120%] opacity-0 visibility-hidden transition-all duration-300"
+              />
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
     <main>
-      <h1>Post Page</h1>
-      <div id="single-post-container">
-        <div id="post-title"></div>
-        <div id="post-image-container"></div>
-        <div id="post-body"></div>
-        <div id="post-tags"></div>
-        <div id="post-author"></div>
+      <h1 class="hidden">Single post</h1>
+      <div
+        id="single-post-container"
+        class="flex justify-center items-center min-h-screen bg-gray-100 mb-20"
+      >
+        <div class="single-post-wrapper w-80 bg-white p-6 rounded-lg shadow-lg">
+          <div id="post-title" class="mb-4 text-xl font-semibold"></div>
+
+          <div
+            id="single-post-wrapper"
+            class="w-full h-96 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg"
+          >
+            <div
+              id="post-image-container"
+              class="w-full h-full object-cover rounded-lg"
+            >
+              <!-- Image content goes here -->
+            </div>
+          </div>
+
+          <div id="post-body" class="mt-4 text-sm text-gray-700"></div>
+          <div id="post-tags" class="mt-2 text-xs text-gray-500"></div>
+          <div
+            id="post-author"
+            class="mt-4 text-sm font-medium text-gray-900"
+          ></div>
+          <button id="edit-post-button-container" class="btn btn.primary">
+            Edit Post
+          </button>
+          <button id="delete-button-container" class="btn btn.primary">
+            Delete Post
+          </button>
+        </div>
       </div>
-      <button id="delete-button-container">Delete Post</button>
     </main>
+    <footer
+      class="fixed bottom-0 left-0 w-full py-4 bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto px-20">
+        <div class="flex justify-between items-center" id="navbar">
+          <a
+            href="/"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+            aria-label="Home"
+          >
+            <i class="fa-solid fa-house text-lg"></i>
+          </a>
+          <div class="flex items-center">
+            <button
+              id="menu-btn"
+              class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+              aria-label="Profile"
+            >
+              <i class="fa-solid fa-user text-lg"></i>
+            </button>
+          </div>
+          <button
+            class="logout-btn font-heading text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
+          </button>
+        </div>
+        <div
+          class="hidden absolute bottom-[60px] left-0 right-0 z-50 w-2/4 translate-x-2/4 bg-green-50 rounded-md border-t-2 text-center py-6 transform transition-transform duration-300 ease-out"
+          id="profile-menu"
+        >
+          <ul class="">
+            <li class="">
+              <a href="/profile/" class="block pb-4 border-b">Profile</a>
+              <a href="/post/create/" class="block pt-4">Create post</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </footer>
   </body>
 </html>
