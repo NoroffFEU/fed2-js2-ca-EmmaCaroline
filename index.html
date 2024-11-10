@@ -39,7 +39,7 @@
               <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
               <i id="moon" class="fa-solid fa-moon text-white"></i>
             </button>
-            <button class="searchicon items-center relative">
+            <button class="searchicon items-center relative dark:text-gray-100">
               <i
                 class="fa-solid fa-magnifying-glass cursor-pointer"
                 id="search-icon"
@@ -63,7 +63,7 @@
       >
         <div class="post-data hidden" ;>
           <div
-            class="relative bg-white shadow-lg rounded-lg overflow-hidden group flex flex-col min-h-[390px]"
+            class="relative bg-white shadow-lg rounded-lg overflow-hidden group flex flex-col min-h-[390px] dark:bg-black"
           >
             <!-- Avatar beside the author name -->
             <div class="flex items-center py-2 px-2">
@@ -72,7 +72,8 @@
                 src="/images/default-avatar.jpg"
                 alt="Default Avatar"
               />
-              <span class="author-name font-body text-sm font-medium ml-2"
+              <span
+                class="author-name font-body text-sm font-medium ml-2 dark:text-gray-100"
                 >Author Name</span
               >
             </div>
@@ -87,19 +88,19 @@
             </div>
             <div class="flex flex-col flex-grow p-4">
               <h2
-                class="post-title font-heading text-lg truncate mb-4 cursor-pointer"
+                class="post-title font-heading text-lg truncate mb-4 cursor-pointer dark:text-gray-100"
               ></h2>
               <p class="post-body hidden"></p>
               <p
                 class="post-tags flex flex-wrap gap-2 overflow-hidden truncate max-h-[2rem]"
               ></p>
               <div
-                class="heart-icon absolute bottom-2 right-4 text-black hover:text-red-500 transition-colors cursor-pointer"
+                class="heart-icon absolute bottom-2 right-4 text-black dark:text-gray-100 hover:text-red-500 transition-colors cursor-pointer"
               >
                 <i class="fa-regular fa-heart"></i>
               </div>
               <div
-                class="commenticon absolute bottom-2 right-12 cursor-pointer"
+                class="commenticon absolute bottom-2 right-12 cursor-pointer dark:text-gray-100"
                 id="comment-icon"
               >
                 <i class="fa-regular fa-comment"></i>
@@ -116,7 +117,7 @@
         <div class="flex justify-between items-center" id="navbar">
           <a
             href="/"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+            class="text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
             aria-label="Home"
           >
             <i class="fa-solid fa-house text-lg"></i>
@@ -124,14 +125,14 @@
           <div class="flex items-center">
             <button
               id="menu-btn"
-              class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+              class="text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
               aria-label="Profile"
             >
               <i class="fa-solid fa-user text-lg"></i>
             </button>
           </div>
           <button
-            class="logout-btn font-heading text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+            class="logout-btn font-heading text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
           >
             <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
           </button>
