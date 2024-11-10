@@ -3,16 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+    <meta
+      name="description"
+      content="Welcome to this fictional social media platform, made for a school project."
+    />
+    <title>Fictional Social Media Homepage</title>
     <script type="module" src="/src/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/7f993fe397.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <main>
-      <img src="/images/noroff-logo.png" alt="Noroff Logo" />
-      <h1>Home</h1>
-      <a href="/profile/">My Profile</a>
-      <button id="logout-btn">Logout</button>
-      <div id="posts-container"></div>
+  <body class="box-border m-0 dark:bg-gray-950">
+    <header
+      class="bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto">
+        <div class="flex justify-between" id="navbar">
+          <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
+            <img
+              src="/images/logo-image.jpg"
+              alt="Fictional Social Media Logo"
+              class="w-14 h-14 rounded md:w-24 md:h-24"
+            />
+          </a>
+
+          <div class="flex justify-between pr-8 items-center">
+            <button id="theme-toggle" class="my-2 mx-6 text-xl">
+              <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
+              <i id="moon" class="fa-solid fa-moon text-white"></i>
+            </button>
+            <button class="searchicon items-center relative dark:text-gray-100">
+              <i
+                class="fa-solid fa-magnifying-glass cursor-pointer"
+                id="search-icon"
+              ></i>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search posts..."
+                class="pl-2 border rounded hidden absolute right-[-80%] top-[120%] opacity-0 visibility-hidden transition-all duration-300"
+              />
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="px-4 pt-16">
+      <h1 class="hidden">All posts</h1>
+      <div
+        id="posts-container"
+        class="container mx-auto px-6 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-20"
+      >
+        <div class="post-data hidden" ;>
+          <div
+            class="relative bg-white shadow-lg rounded-lg overflow-hidden group flex flex-col min-h-[390px] dark:bg-black"
+          >
+            <div class="flex items-center py-2 px-2">
+              <img
+                class="default-avatar w-10 h-10 rounded-full"
+                src="/images/default-avatar.jpg"
+                alt="Default Avatar"
+              />
+              <span
+                class="author-name font-body text-sm font-medium ml-2 dark:text-gray-100"
+                >Author Name</span
+              >
+            </div>
+            <div
+              class="image-container w-full h-60 overflow-hidden cursor-pointer"
+            >
+              <img
+                src=""
+                alt=""
+                class="post-image w-full h-full object-cover"
+              />
+            </div>
+            <div class="flex flex-col flex-grow p-4">
+              <h2
+                class="post-title font-heading text-lg truncate mb-4 cursor-pointer dark:text-gray-100"
+              ></h2>
+              <p class="post-body hidden"></p>
+              <p
+                class="post-tags flex flex-wrap gap-2 overflow-hidden truncate max-h-[2rem]"
+              ></p>
+              <div
+                class="heart-icon absolute bottom-2 right-4 text-black dark:text-gray-100 hover:text-red-500 transition-colors cursor-pointer"
+              >
+                <i class="fa-regular fa-heart"></i>
+              </div>
+              <div
+                class="commenticon absolute bottom-2 right-12 cursor-pointer dark:text-gray-100"
+                id="comment-icon"
+              >
+                <i class="fa-regular fa-comment"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
+    <footer
+      class="fixed bottom-0 left-0 w-full py-4 bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto px-20">
+        <div class="flex justify-between items-center" id="navbar">
+          <a
+            href="/"
+            class="text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
+            aria-label="Home"
+          >
+            <i class="fa-solid fa-house text-lg"></i>
+          </a>
+          <div class="flex items-center">
+            <button
+              id="menu-btn"
+              class="text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
+              aria-label="Profile"
+            >
+              <i class="fa-solid fa-user text-lg"></i>
+            </button>
+          </div>
+          <button
+            class="logout-btn font-heading text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
+          </button>
+        </div>
+        <div
+          class="hidden absolute bottom-[60px] left-0 right-0 z-50 w-2/4 translate-x-2/4 bg-green-50 rounded-md border-t-2 text-center py-6 transform transition-transform duration-300 ease-out"
+          id="profile-menu"
+        >
+          <ul class="">
+            <li class="">
+              <a href="/profile/" class="block pb-4 border-b">Profile</a>
+              <a href="/post/create/" class="block pt-4">Create post</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </footer>
   </body>
 </html>

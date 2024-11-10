@@ -40,6 +40,7 @@ export async function onCreatePost(event) {
     const response = await createPost(post);
     alert("Post created!");
     form.reset();
+    window.location.href = "/profile/";
   } catch (error) {
     console.error("Error creating post: ", error);
     alert("Failed to create post. Please try again.");

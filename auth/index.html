@@ -2,13 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+    <meta
+      name="description"
+      content="Login/Register. Welcome to this fictional social media platform, made for a school project."
+    />
+    <title>Fictional Social Media Login Register</title>
     <script type="module" src="/src/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/7f993fe397.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1>Auth</h1>
-    <a href="./login/">Login</a> or <a href="./register/">Register</a>
+  <body class="box-border m-0 dark:bg-gray-950">
+    <header
+      class="bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto">
+        <div class="flex justify-between" id="navbar">
+          <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
+            <img
+              src="/images/logo-image.jpg"
+              alt="Fictional Social Media Logo"
+              class="w-14 h-14 rounded md:w-24 md:h-24"
+            />
+          </a>
+
+          <div class="flex justify-between pr-8 items-center">
+            <button id="theme-toggle" class="my-2 mx-6 text-xl">
+              <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
+              <i id="moon" class="fa-solid fa-moon text-white"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <h1 class="hidden"></h1>
+      <div class="auth-page-container flex justify-center items-start mt-20">
+        <div
+          class="auth-page-card flex flex-col items-center border border-gray-500 rounded w-52 py-10 md:w-96"
+        >
+          <a href="./login/" class="pb-6 dark:text-gray-100">Login</a>
+          <hr class="w-full border-t border-gray-500 my-2" />
+          <a href="./register/" class="pt-6 dark:text-gray-100">Register</a>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

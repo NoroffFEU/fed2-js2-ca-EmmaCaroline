@@ -1,1 +1,26 @@
-@import url(_reset.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+}
+
+/* Example from module 2 - create button components to use */
+@layer components { 
+  /* Base button styles */
+  .btn {
+    @apply font-medium text-sm py-1 px-2 border border-gray-500 rounded ;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-gray-200 ;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-500 text-white;
+  }
+}

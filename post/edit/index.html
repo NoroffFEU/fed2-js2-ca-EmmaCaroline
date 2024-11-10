@@ -3,51 +3,181 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+    <meta name="description" content="Edit a social media post" />
+    <title>Edit post</title>
     <script type="module" src="/src/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/7f993fe397.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <header>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/profile/">Profile</a>
+  <header
+    class="bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+  >
+    <nav class="container mx-auto">
+      <div class="flex justify-between" id="navbar">
+        <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
+          <img
+            src="/images/logo-image.jpg"
+            alt="Fictional Social Media Logo"
+            class="w-14 h-14 rounded md:w-24 md:h-24"
+          />
+        </a>
+
+        <div class="flex justify-between px-4 items-center">
+          <button id="theme-toggle" class="my-2 mx-6 text-xl">
+            <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
+            <i id="moon" class="fa-solid fa-moon text-white"></i>
+          </button>
+          <button class="searchicon items-center relative">
+            <i
+              class="fa-solid fa-magnifying-glass cursor-pointer"
+              id="search-icon"
+            ></i>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search posts..."
+              class="pl-2 border rounded hidden absolute right-[-80%] top-[120%] opacity-0 visibility-hidden transition-all duration-300"
+            />
+          </button>
+        </div>
+      </div>
     </nav>
   </header>
-  <body>
-    <main>
-      <h1>Edit Post</h1>
-      <form name="editPost" class="form-container">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" />
-
-        <label for="body">Body</label>
-        <textarea name="body" id="body"></textarea>
-
-        <label for="media-url">Media</label>
-        <input
-          type="url"
-          name="media-url"
-          id="media-url"
-          placeholder="Insert image URL"
-        />
-
-        <label for="media-alt">Media alt</label>
-        <input
-          type="text"
-          name="media-alt"
-          id="media-alt"
-          placeholder="Alt text for image"
-        />
-
-        <label for="tags">Tags</label>
-        <input
-          type="text"
-          name="tags"
-          id="tags"
-          placeholder="Comma-separated tags"
-        />
-
-        <button type="submit">Edit Post</button>
+  <body class="box-border m-0 dark:bg-gray-950">
+    <main class="px-4 pt-10 pb-20">
+      <h1 class="hidden">Edit Post</h1>
+      <button class="mb-6 mx-4 text-lg dark:text-gray-200">
+        <a href="/profile/" class="flex items-center">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </button>
+      <form
+        name="editPost"
+        class="form-container max-w-sm mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-300 font-body dark:bg-gray-900"
+      >
+        <div class="mb-4">
+          <label
+            for="title"
+            class="block text-sm font-semibold text-gray-700 mb-2 font-heading dark:text-gray-200"
+            >Title</label
+          >
+          <input
+            type="text"
+            name="title"
+            id="title"
+            required
+            class="w-full p-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-100 dark:bg-gray-800 dark:text-gray-100"
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            for="body"
+            class="block text-sm font-semibold text-gray-700 mb-2 font-heading dark:text-gray-200"
+            >Body</label
+          >
+          <textarea
+            name="body"
+            id="body"
+            required
+            class="w-full p-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-100 dark:bg-gray-800 dark:text-gray-100"
+          ></textarea>
+        </div>
+        <div class="mb-4">
+          <label
+            for="media-url"
+            class="block text-sm font-semibold text-gray-700 mb-2 font-heading dark:text-gray-200"
+            >Media URL</label
+          >
+          <input
+            type="url"
+            name="media-url"
+            id="media-url"
+            placeholder="Insert image URL"
+            class="w-full p-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-100 dark:bg-gray-800 dark:text-gray-100"
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            for="media-alt"
+            class="block text-sm font-semibold text-gray-700 mb-2 font-heading dark:text-gray-200"
+            >Media Alt</label
+          >
+          <input
+            type="text"
+            name="media-alt"
+            id="media-alt"
+            placeholder="Alt text for image"
+            class="w-full p-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-100 dark:bg-gray-800 dark:text-gray-100"
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            for="tags"
+            class="block text-sm font-semibold text-gray-700 mb-2 font-heading dark:text-gray-200"
+            >Tags</label
+          >
+          <input
+            type="text"
+            name="tags"
+            id="tags"
+            placeholder="Comma-separated tags"
+            class="w-full p-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-100 dark:bg-gray-800 dark:text-gray-100"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-auto btn btn.primary dark:bg-gray-800 dark:text-gray-200"
+        >
+          Edit Post
+        </button>
       </form>
     </main>
+    <footer
+      class="fixed bottom-0 left-0 w-full py-4 bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto px-20">
+        <div class="flex justify-between items-center" id="navbar">
+          <a
+            href="/"
+            class="text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
+            aria-label="Home"
+          >
+            <i class="fa-solid fa-house text-lg"></i>
+          </a>
+          <div class="flex items-center">
+            <button
+              id="menu-btn"
+              class="text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
+              aria-label="Profile"
+            >
+              <i class="fa-solid fa-user text-lg"></i>
+            </button>
+          </div>
+          <button
+            class="logout-btn font-heading text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-gray-100"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
+          </button>
+        </div>
+        <div
+          class="hidden absolute bottom-[60px] left-0 right-0 z-50 w-2/4 translate-x-2/4 bg-green-50 rounded-md border-t-2 text-center py-6 transform transition-transform duration-300 ease-out"
+          id="profile-menu"
+        >
+          <ul class="space-y-4">
+            <li>
+              <a href="/profile/" class="block">Profile</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </footer>
   </body>
 </html>

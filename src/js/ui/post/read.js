@@ -18,56 +18,81 @@ import { onEditButton } from "./update";
  * @throws {Error} Will log an error if posts is not an array.
  */
 
+let allPosts = [];
+
 async function getPosts(posts) {
   const postsContainer = document.getElementById("posts-container");
   const postByUserContainer = document.getElementById("own-posts-container");
 
-  // Checks if posts is an array before proceeding
+  // Check if posts is an array before proceeding
   if (!Array.isArray(posts)) {
     console.error("Expected posts to be an array, but got: ", posts);
     return; // Exit if posts is not an array
   }
 
   posts.forEach((post) => {
-    const postData = document.createElement("div");
-    postData.classList.add("post-data");
+    // Clone a post template and update its contents
+    const postTemplate = document.querySelector(".post-data").cloneNode(true);
 
-    const username = document.createElement("p");
-    username.textContent = `Posted by: ${post.author.name}`;
+    // Fill in the post data
+    postTemplate.querySelector(".author-name").textContent = post.author.name;
+    postTemplate.querySelector(".post-title").textContent = post.title;
+    postTemplate.querySelector(".post-body").innerText = post.body;
 
-    const title = document.createElement("h2");
-    title.textContent = post.title;
+    // Select the image element and its container
+    const image = postTemplate.querySelector(".post-image");
+    const imageContainer = image.parentElement; // This is the container holding the image
 
-    const imageContainer = document.createElement("div");
-    imageContainer.classList.add("image-container");
-    if (post.media) {
-      const image = document.createElement("img");
+    // If there's media, display the image
+    if (post.media && post.media.url) {
       image.src = post.media.url;
-      image.alt = post.media.alt;
-      imageContainer.appendChild(image);
+      image.alt = post.media.alt || "No description provided";
+      image.style.display = "block"; // Ensure image is displayed if present
+      imageContainer.style.cursor = "pointer"; // Set cursor pointer for clickable container
+    } else {
+      image.style.display = "none"; // Hide the image if no media
+      imageContainer.style.cursor = "default"; // Remove cursor pointer when no image
     }
 
-    const body = document.createElement("p");
-    body.innerText = post.body;
+    const tagsContainer = postTemplate.querySelector(".post-tags");
+    tagsContainer.innerHTML = ""; // Clear any existing content
 
-    const tags = document.createElement("p");
-    tags.innerText = post.tags;
+    if (post.tags.length > 0) {
+      post.tags.forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.textContent = `#${tag}`;
+        tagElement.className =
+          "inline-block bg-blue-100 text-blue-600 rounded-full px-2 py-1 text-xs font-semibold truncate";
+        tagsContainer.appendChild(tagElement);
+      });
+    } else {
+      tagsContainer.textContent = "";
+    }
 
-    const seePostBtn = document.createElement("button");
-    seePostBtn.innerText = "See Post";
-
-    seePostBtn.addEventListener("click", () => {
+    // Function to handle the click event
+    const handleClick = () => {
       localStorage.setItem("postID", JSON.stringify(post.id));
       window.location.href = "/post/";
-    });
+    };
 
-    postData.append(title, imageContainer, username, body, tags, seePostBtn);
+    // Make the title clickable
+    const title = postTemplate.querySelector(".post-title");
+    title.addEventListener("click", handleClick);
 
-    if (window.location.pathname === "/") {
-      postsContainer.append(postData);
-    } else if (window.location.pathname === "/profile/") {
-      postByUserContainer.append(postData);
+    // Make the image clickable if it exists
+    if (image.style.display !== "none") {
+      image.addEventListener("click", handleClick);
     }
+
+    // Append the populated post to the appropriate container
+    if (window.location.pathname === "/") {
+      postsContainer.appendChild(postTemplate);
+    } else if (window.location.pathname === "/profile/") {
+      postByUserContainer.appendChild(postTemplate);
+    }
+
+    // Make the cloned post visible
+    postTemplate.style.display = "block"; // Show the post after cloning
   });
 }
 
@@ -93,49 +118,76 @@ async function getPosts(posts) {
 
 export async function getSinglePost(post) {
   const singlePostContainer = document.getElementById("single-post-container");
-
-  const postData = document.createElement("div");
-  postData.classList.add("post-data");
-
-  const username = document.createElement("p");
-  if (post.author) {
-    username.innerText = `Posted by: ${post.author.name}`;
+  if (!singlePostContainer) {
+    console.error("Single post container not found!");
+    return;
   }
 
-  const title = document.createElement("h2");
-  title.textContent = post.title;
+  // Get the container where the post data will be displayed
+  const postTitleElement = document.getElementById("post-title");
+  const postBodyElement = document.getElementById("post-body");
+  const postTagsElement = document.getElementById("post-tags");
+  const postAuthorElement = document.getElementById("post-author");
+  const postImageContainerElement = document.getElementById(
+    "post-image-container"
+  );
 
-  const imageContainer = document.createElement("div");
-  imageContainer.classList.add("image-container");
+  if (
+    !postTitleElement ||
+    !postBodyElement ||
+    !postTagsElement ||
+    !postAuthorElement ||
+    !postImageContainerElement
+  ) {
+    console.error("One or more post elements are not found!");
+    return;
+  }
+
+  // Populate the elements with data from the post
+  postTitleElement.textContent = post.title;
+  postBodyElement.innerHTML = post.body || "No content available";
+
+  // Clear any existing tags
+  postTagsElement.innerHTML = "";
+
+  // Populate the tags with the same styling as in `getPosts`
+  if (Array.isArray(post.tags) && post.tags.length > 0) {
+    post.tags.forEach((tag) => {
+      const tagElement = document.createElement("span");
+      tagElement.textContent = `#${tag}`;
+      tagElement.className =
+        "inline-block bg-blue-100 text-blue-600 rounded-full px-2 py-1 text-xs font-semibold truncate";
+      postTagsElement.appendChild(tagElement);
+    });
+  } else {
+    postTagsElement.textContent = "";
+  }
+
+  if (post.author) {
+    postAuthorElement.innerText = `Posted by: ${post.author.name}`;
+  }
+
+  // Add image if present
   if (post.media && post.media.url) {
     const image = document.createElement("img");
     image.src = post.media.url;
     image.alt = post.media.alt || "No description provided";
-    imageContainer.appendChild(image);
-  }
-
-  const body = document.createElement("p");
-  body.innerText = post.body || "No content available";
-
-  const tags = document.createElement("p");
-  if (Array.isArray(post.tags) && post.tags.length > 0) {
-    tags.innerText = post.tags.join(", ");
+    postImageContainerElement.innerHTML = ""; // Clear existing content
+    postImageContainerElement.appendChild(image);
   } else {
-    tags.innerText = "No tags";
+    postImageContainerElement.innerHTML = ""; // Clear if no image
   }
 
-  postData.append(
-    title,
-    imageContainer,
-    body,
-    tags,
-    username,
-    onEditButton(post, post.author.name)
-  );
+  // Append the "Edit Post" button if the user is the author
+  const editButton = onEditButton(post, post.author.name);
+  if (editButton && editButton instanceof Node) {
+    singlePostContainer.appendChild(editButton);
+  }
 
-  singlePostContainer.append(postData);
-
+  // Set the post ID in localStorage
   localStorage.setItem("postID", JSON.stringify(post.id));
+
+  // Call the delete function (existing delete logic remains unchanged)
   onDeletePost(post, post.author.name);
 }
 
@@ -150,7 +202,7 @@ export async function getSinglePost(post) {
 
 export async function onReadAllPosts() {
   try {
-    const allPosts = await readPosts();
+    allPosts = await readPosts();
 
     await getPosts(allPosts.data);
   } catch (error) {

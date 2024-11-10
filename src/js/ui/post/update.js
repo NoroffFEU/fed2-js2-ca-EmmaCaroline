@@ -89,22 +89,24 @@ function isValidURL(string) {
 
 export const onEditButton = (post, author) => {
   const user = load("user");
-  const userName = user.name;
+  const userName = user?.name;
 
+  // Get the existing edit button element
+  const editButton = document.getElementById("edit-post-button-container");
+
+  // Ensure the button is hidden by default
+  editButton.style.display = "none";
+
+  // Check if the logged-in user is the author of the post
   if (author === userName) {
-    const editButton = document.createElement("a");
-    editButton.innerText = "Edit post";
-    editButton.setAttribute("href", `/post/edit/?id=${post.id}`);
-    editButton.setAttribute("id", "edit-link");
-    editButton.classList.add("button");
+    editButton.innerText = "Edit Post";
+    editButton.setAttribute("id", post.id);
+    editButton.style.display = "block"; // Show the button only for the author
 
+    // Add the click event to navigate to the edit page
     editButton.addEventListener("click", () => {
       localStorage.setItem("postID", JSON.stringify(post.id));
-      window.location.href = editButton.getAttribute("href");
+      window.location.href = `/post/edit/?id=${post.id}`;
     });
-
-    return editButton;
-  } else {
-    return "";
   }
 };
