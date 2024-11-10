@@ -18,7 +18,9 @@ import { onEditButton } from "./update";
  * @throws {Error} Will log an error if posts is not an array.
  */
 
-async function getPosts(posts) {
+let allPosts = [];
+
+/*async function getPosts(posts) {
   const postsContainer = document.getElementById("posts-container");
   const postByUserContainer = document.getElementById("own-posts-container");
 
@@ -51,6 +53,69 @@ async function getPosts(posts) {
     // Handle the "See Post" button click
     const seePostBtn = postTemplate.querySelector(".see-post-btn");
     seePostBtn.addEventListener("click", () => {
+      localStorage.setItem("postID", JSON.stringify(post.id));
+      window.location.href = "/post/";
+    });
+
+    // Append the populated post to the appropriate container
+    if (window.location.pathname === "/") {
+      postsContainer.appendChild(postTemplate);
+    } else if (window.location.pathname === "/profile/") {
+      postByUserContainer.appendChild(postTemplate);
+    }
+
+    // Make the cloned post visible
+    postTemplate.style.display = "block"; // Show the post after cloning
+  });
+}*/
+
+async function getPosts(posts) {
+  const postsContainer = document.getElementById("posts-container");
+  const postByUserContainer = document.getElementById("own-posts-container");
+
+  // Check if posts is an array before proceeding
+  if (!Array.isArray(posts)) {
+    console.error("Expected posts to be an array, but got: ", posts);
+    return; // Exit if posts is not an array
+  }
+
+  posts.forEach((post) => {
+    // Clone a post template and update its contents
+    const postTemplate = document.querySelector(".post-data").cloneNode(true);
+
+    // Fill in the post data
+    postTemplate.querySelector(".author-name").textContent = post.author.name;
+    postTemplate.querySelector(".post-title").textContent = post.title;
+    postTemplate.querySelector(".post-body").innerText = post.body;
+
+    // If there's media, display the image
+    if (post.media) {
+      const image = postTemplate.querySelector(".post-image");
+      image.src = post.media.url;
+      image.alt = post.media.alt || "No description provided";
+    }
+
+    /* Display tags
+    postTemplate.querySelector(".post-tags").innerText =
+      post.tags.join(", ") || "No tags";*/
+
+    const tagsContainer = postTemplate.querySelector(".post-tags");
+    tagsContainer.innerHTML = ""; // Clear any existing content
+
+    if (post.tags.length > 0) {
+      post.tags.forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.textContent = `#${tag}`;
+        tagElement.className =
+          "inline-block bg-blue-100 text-blue-600 rounded-full px-2 py-1 text-xs font-semibold truncate";
+        tagsContainer.appendChild(tagElement);
+      });
+    } else {
+      tagsContainer.textContent = "";
+    }
+
+    // Make the whole card clickable
+    postTemplate.addEventListener("click", () => {
       localStorage.setItem("postID", JSON.stringify(post.id));
       window.location.href = "/post/";
     });
@@ -140,7 +205,7 @@ export async function getSinglePost(post) {
 
 export async function onReadAllPosts() {
   try {
-    const allPosts = await readPosts();
+    allPosts = await readPosts();
 
     await getPosts(allPosts.data);
   } catch (error) {

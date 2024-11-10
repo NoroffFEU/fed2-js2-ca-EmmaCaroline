@@ -20,61 +20,28 @@
       rel="stylesheet"
     />
   </head>
-  <header class="bg-green-50 shadow-lg mb-16">
-    <nav class="container mx-auto">
-      <div class="flex justify-between" id="navbar">
-        <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
-          <img
-            src="/images/logo-image.jpg"
-            alt="Fictional Social Media Logo"
-            class="w-32 h-32 rounded"
-          />
-        </a>
-
-        <div class="hidden md:flex items-center pr-10" id="menu-desktop">
-          <a
-            href="/"
-            class="my-2 mx-6 font-medium text-lg text-gray-600 hover:text-gray-950"
-            >Home</a
-          >
-          <a
-            href="/profile/"
-            class="my-2 mx-6 font-medium text-lg text-gray-600 underline hover:text-gray-950"
-            >Profile</a
-          >
-          <button
-            class="logout-btn py-2 mx-4 px-4 font-medium text-lg text-gray-600 border border-gray-400 rounded hover:text-gray-950"
-          >
-            Logout
+  <body class="box-border m-0 dark:bg-gray-950">
+    <header
+      class="bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto">
+        <div class="flex justify-between" id="navbar">
+          <a href="/" class="flex items-center py-4 px-6" aria-label="Home">
+            <img
+              src="/images/logo-image.jpg"
+              alt="Fictional Social Media Logo"
+              class="w-14 h-14 rounded md:w-24 md:h-24"
+            />
+          </a>
+          <button id="theme-toggle" class="my-2 mx-6 text-xl">
+            <i id="sun" class="fa-solid fa-sun text-gray-600"></i>
+            <i id="moon" class="fa-solid fa-moon text-white"></i>
           </button>
         </div>
-
-        <div class="flex px-6 md:hidden items-center" id="hamburger-icon">
-          <button class="" id="menu-btn">
-            <i class="fa-solid fa-bars text-3xl"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="hidden bg-white border-t py-4 px-6" id="mobile-menu">
-        <ul class="">
-          <li class="py-2 font-medium text-lg text-gray-600">
-            <a href="/" class="">Home</a>
-          </li>
-          <li class="py-2 font-medium text-lg text-gray-600 underline">
-            <a href="/profile/" class="">Profile</a>
-          </li>
-          <li class="py-2 font-medium text-lg text-gray-600">
-            <button class="logout-btn">Logout</button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <body class="box-border m-0">
+      </nav>
+    </header>
     <main>
-      <h1>Profile</h1>
-      <button id="toggle-button">Update Profile</button>
+      <h1 class="hidden">Profile</h1>
       <form name="updateProfile" class="form-container">
         <label for="avatar-url">Avatar URL</label>
         <input type="url" name="avatar-url" placeholder="Insert image URL" />
@@ -101,7 +68,7 @@
         <button type="submit">Save Profile</button>
       </form>
       <div id="profile-container">
-        <div class="relative w-full h-36 sm:h-72 md:h-96 lg:h-112">
+        <div class="relative w-full h-36 sm:h-72 md:h-96 lg:h-112 mb-4">
           <img
             id="banner-image"
             class="absolute inset-0 w-full h-full object-cover"
@@ -109,29 +76,74 @@
             src="default-banner.jpg"
           />
         </div>
-        <h2 id="user-name">Username</h2>
-        <img
-          id="avatar-image"
-          class="avatar-image w-20 h-20 rounded-full"
-          alt="Avatar Image"
-          src="default-avatar.jpg"
-        />
-        <p id="bio">No bio available</p>
+        <button id="toggle-button">Update Profile</button>
+
+        <div class="flex justify-center">
+          <img
+            id="avatar-image"
+            class="avatar-image w-20 h-20 rounded-full"
+            alt="Avatar Image"
+            src="default-avatar.jpg"
+          />
+        </div>
+        <h2 id="user-name" class="flex justify-center mb-4"></h2>
+        <p id="bio" class="mb-4 px-6 flex justify-center">No bio available</p>
       </div>
-      <div id="own-posts-container">
-        <div class="post-data" style="display: none">
-          <h2 class="post-title"></h2>
-          <div class="image-container">
-            <img src="" alt="" class="post-image" />
+      <div
+        id="own-posts-container"
+        class="container mx-auto px-6 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-20"
+      >
+        <div class="post-data hidden" ;>
+          <div
+            class="relative bg-white shadow-lg rounded-lg overflow-hidden group flex flex-col min-h-[380px]"
+          >
+            <div class="image-container w-full h-60 overflow-hidden">
+              <img
+                src=""
+                alt=""
+                class="post-image w-full h-full object-cover"
+              />
+            </div>
+            <div class="flex flex-col flex-grow p-4">
+              <h2 class="post-title font-heading text-lg truncate mb-4"></h2>
+              <p class="post-body hidden"></p>
+              <p class="post-author font-body text-sm mb-2">
+                Posted by:
+                <span class="author-name font-body text-sm font-medium"></span>
+              </p>
+              <p
+                class="post-tags flex flex-wrap gap-2 overflow-hidden truncate max-h-[2rem]"
+              ></p>
+            </div>
           </div>
-          <p class="post-body"></p>
-          <p class="post-author">
-            Posted by: <span class="author-name"></span>
-          </p>
-          <p class="post-tags"></p>
-          <button class="see-post-btn">See Post</button>
         </div>
       </div>
     </main>
+    <footer
+      class="fixed bottom-0 left-0 w-full py-4 bg-green-50 shadow-lg dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto px-20">
+        <div class="flex justify-between items-center" id="navbar">
+          <a
+            href="/"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+            aria-label="Home"
+          >
+            <i class="fa-solid fa-house text-lg"></i>
+          </a>
+          <a
+            href="/profile/"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+            aria-label="Profile"
+            ><i class="fa-solid fa-user text-lg"></i
+          ></a>
+          <button
+            class="logout-btn font-heading text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-gray-100"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
+          </button>
+        </div>
+      </nav>
+    </footer>
   </body>
 </html>
